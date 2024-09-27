@@ -1,0 +1,27 @@
+.calendar-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  max-width: max-content;
+  background-color: #b1c6d6;
+  padding: 6px 32px;
+  border-radius: 26px;
+  margin: 0 10px 8px;
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    width: 120px;
+    padding: 12px 32px;
+    border-radius: 18px;
+    text-align: center;
+  }
+}
+
+.button-mode {
+  background-color: #fff;
+}

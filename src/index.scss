@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Comfortaa', sans-serif;
+  background: linear-gradient(to right, #e7f784, #c8edff);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  background-color: #c8edff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #e6f87c;
+  border-radius: 8px;
+}

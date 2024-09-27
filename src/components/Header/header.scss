@@ -1,0 +1,72 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 60px 0 60px 64px;
+  align-items: center;
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.create-event-btn {
+  padding: 0 22px;
+  background-color: #a3d4f9;
+  color: #000;
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    margin-right: 8px;
+    font-size: 26px;
+  }
+
+  &__text {
+    font-weight: 900;
+  }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+
+  &__today-btn {
+    margin-left: 28px;
+    padding: 0 36px;
+    background-color: #131313;
+    color: #fff;
+  }
+
+  &__nav-icon {
+    font-size: 18px;
+  }
+
+  &__nav-icons {
+    display: flex;
+    gap: 18px;
+
+    .icon-button:hover {
+      transition: transform 0.2s ease-in-out;
+      transform: scale(1.2);
+    }
+  }
+
+  &__displayed-month {
+    font-size: 30px;
+    font-weight: 900;
+    color: rgb(99, 99, 99);
+  }
+
+  &__displayed-year {
+    font-size: 32px;
+    font-weight: bold;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: #a3d4f9;
+    text-shadow: 1px 1px 2px #636100;
+  }
+}

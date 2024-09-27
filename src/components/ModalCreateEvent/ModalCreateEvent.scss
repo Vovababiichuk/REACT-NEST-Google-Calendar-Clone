@@ -1,0 +1,90 @@
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+
+  &__content {
+    background: #fff;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #cccccc45;
+  z-index: 10;
+}
+
+.create-event {
+  display: flex;
+  flex-direction: column;
+
+  &__close-btn {
+    margin-left: auto;
+    transform: rotate(45deg) scale(2);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+  }
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+
+  &__field {
+    margin: 8px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f8ffcf;
+
+    &:focus {
+      outline: none;
+      border: none;
+      background-color: #dbd6ff;
+    }
+  }
+
+  &__submit-btn {
+    margin-left: auto;
+    border: none;
+    color: #fff;
+    background-color: #9380ff;
+    border: none;
+    cursor: pointer;
+    margin-right: 8px;
+    padding: 10px 28px;
+    border-radius: 8px;
+  }
+}
+
+.event-form__color {
+  position: relative;
+  &-base {
+    display: block;
+    width: 80px;
+    height: 24px;
+    border-radius: 4px;
+    margin: 8px;
+    cursor: pointer;
+  }
+
+  &-picker {
+    position: absolute;
+    top: -220px;
+    right: 136px;
+  }
+}

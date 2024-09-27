@@ -1,0 +1,14 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+
+  &__time-slot {
+    height: 59px;
+    position: relative;
+
+    &:hover {
+      background-color: rgb(233, 251, 255);
+    }
+  }
+}

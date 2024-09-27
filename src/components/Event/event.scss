@@ -1,0 +1,67 @@
+.event {
+  position: absolute;
+  width: 90%;
+  z-index: 1;
+  border-radius: 8px;
+  transition: scale 0.2s ease-in-out;
+
+  &:hover {
+    scale: 1.05;
+    cursor: pointer;
+  }
+
+  &__title {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 1px 4px;
+    background-color: #fff;
+
+  }
+
+  &__time {
+    color: #ffffff;
+    font-size: 14px;
+  }
+}
+
+.delete-event-btn {
+  cursor: pointer;
+  border: none;
+}
+
+.event {
+  padding: 6px;
+  font-size: 16px;
+
+  &__title {
+    background-color: #f5f5f5;
+    color: #242424;
+    box-shadow: 0 0 8px rgb(255, 255, 255);
+  }
+
+  &__time {
+    font-size: 14px;
+  }
+
+  &--small {
+    padding: 0;
+    font-size: 12px;
+
+    .event__title {
+      background-color: transparent;
+      color: #fff;
+      box-shadow: none;
+    }
+  }
+
+  &--hide-time {
+    & .event__time {
+      display: none;
+    }
+  }
+}
