@@ -1,7 +1,7 @@
+import { CalendarPlusIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import moment from 'moment';
 import { HeaderProps } from '../../types/types';
 import CalendarModeToggle from '../CalendarModeToggle/CalendarModeToggle';
-import { CalendarPlusIcon, ChevronRight, ChevronLeft } from 'lucide-react';
 import './header.scss';
 
 const Header = ({
@@ -62,4 +62,3 @@ const Header = ({
 };
 
 export default Header;
-

@@ -1,5 +1,9 @@
 import { createContext } from 'react';
-import { ModalContextInterface, UpdateEventModalContextInterface, ShowAllDataEventModalContextInterface } from '../types/types';
+import {
+  ModalContextInterface,
+  ShowAllDataEventModalContextInterface,
+  UpdateEventModalContextInterface,
+} from '../types/types';
 
 export const ModalContext = createContext<ModalContextInterface>({
   handleOpenCreateModal: () => {},
@@ -11,4 +15,6 @@ export const UpdateEventModalContext = createContext<UpdateEventModalContextInte
 
 export const ShowAllDataEventModalContext = createContext<ShowAllDataEventModalContextInterface>({
   handleOpenShowAllDataModal: () => {},
-})
+});
+
+export const CurrentWeekStartDateContext = createContext<Date | null>(null);
