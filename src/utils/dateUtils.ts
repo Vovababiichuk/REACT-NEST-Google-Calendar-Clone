@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const getWeekStartDate = (date: Date): Date => {
   const dateCopy = new Date(date);
   const dayOfWeek = dateCopy.getDay();
@@ -49,6 +51,23 @@ export const formatTimeRange = (dateFrom: Date, dateTo: Date): string => {
   return `${
     eventStart.split(/(?<=\d)(?=AM|PM)/)[0]
   }-${formattedHourTo}${formattedMinutesTo}${periodTo}`;
+};
+
+export const formatFirstTime = (date: moment.Moment) =>
+  date.minutes() === 0 ? date.format('h') : date.format('h:mm');
+
+export const formatSecondTime = (date: moment.Moment) =>
+  date.minutes() === 0 ? date.format('hA') : date.format('h:mmA');
+
+export const getFormattedTimeRange = (dateFrom: Date, dateTo: Date): string => {
+  const eventDateFrom = moment(dateFrom).local();
+  const eventDateTo = moment(dateTo).local();
+
+  const isEndMidnight = eventDateTo.hours() === 0 && eventDateTo.minutes() === 0;
+
+  return isEndMidnight
+    ? `${formatSecondTime(eventDateFrom)}-${moment(dateTo).format('hA')}`
+    : `${formatFirstTime(eventDateFrom)}-${formatSecondTime(eventDateTo)}`;
 };
 
 export const days: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
