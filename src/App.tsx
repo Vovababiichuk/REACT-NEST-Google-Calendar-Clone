@@ -174,7 +174,7 @@ function App() {
         {showConfetti && (
           <Confetti
             width={window.innerWidth}
-            height={window.innerHeight}
+            height={1700}
             numberOfPieces={300}
             gravity={0.9}
             wind={0.04}
