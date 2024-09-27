@@ -3,12 +3,11 @@ import { DayProps } from '../../types/types';
 import CurrentTimeLine from '../CurrentTimeLine/CurrentTimeLine';
 import Hour from '../Hour/Hour';
 
-const Day = ({ dataDay, dayEvents }: DayProps) => {
+const Day = ({ dayDate, dayEvents }: DayProps) => {
   const hours = Array.from({ length: 24 }, (_, index) => index);
-  const dayDate = moment().date(dataDay).toDate();
 
   return (
-    <div className="calendar__day" data-day={dataDay}>
+    <div className="calendar__day" data-day={dayDate}>
       <CurrentTimeLine dayDate={dayDate} />
       {hours.map(hour => {
         const hourEvents = dayEvents.filter(event => {
@@ -17,7 +16,12 @@ const Day = ({ dataDay, dayEvents }: DayProps) => {
         });
 
         return (
-          <Hour key={dataDay + hour} dataHour={hour} hourEvents={hourEvents} dataDay={dataDay} />
+          <Hour
+            key={`${dayDate.getDate()}-${hour}`}
+            dataHour={hour}
+            hourEvents={hourEvents}
+            dataDay={dayDate.getDate()}
+          />
         );
       })}
     </div>
@@ -25,4 +29,3 @@ const Day = ({ dataDay, dayEvents }: DayProps) => {
 };
 
 export default Day;
-

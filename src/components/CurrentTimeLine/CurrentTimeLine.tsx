@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react';
 import moment from 'moment';
+import { useEffect, useState } from 'react';
+import { CurrentTimeLineProps } from '../../types/types';
 import './CurrentTimeLine.scss';
-
-interface CurrentTimeLineProps {
-  dayDate: Date;
-}
 
 const CurrentTimeLine = ({ dayDate }: CurrentTimeLineProps) => {
   const [currentTime, setCurrentTime] = useState(moment());
@@ -18,13 +15,14 @@ const CurrentTimeLine = ({ dayDate }: CurrentTimeLineProps) => {
   }, []);
 
   const isCurrentDay = moment(dayDate).isSame(moment(), 'day');
+  const isCurrentMonth = moment(dayDate).isSame(moment(), 'month');
 
   const getTopPosition = () => {
     const now = currentTime.clone();
     return ((now.hours() * 60 + now.minutes()) / (24 * 60)) * 100;
   };
 
-  return isCurrentDay ? (
+  return isCurrentDay && isCurrentMonth ? (
     <>
       <div className="red-line" style={{ top: `${getTopPosition()}%` }} />
       <div className="red-ball" style={{ top: `${getTopPosition()}%` }} />

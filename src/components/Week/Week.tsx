@@ -10,7 +10,7 @@ const Week = ({ weekDates, calendarEvents }: WeekProps) => (
         moment(event.dateFrom).isSame(dayDate, 'day'),
       );
 
-      return <Day key={dayDate.getTime()} dataDay={dayDate.getDate()} dayEvents={dayEvents} />;
+      return <Day key={dayDate.getTime()} dayEvents={dayEvents} dayDate={dayDate} />;
     })}
   </div>
 );

@@ -32,7 +32,7 @@ export interface WeekProps {
 }
 
 export interface DayProps {
-  dataDay: number;
+  dayDate: Date;
   dayEvents: EventInterface[];
   onDeleteEvent?: (_id: string) => void;
 }
@@ -94,4 +94,8 @@ export interface UpdateEventModalContextInterface {
 
 export interface ShowAllDataEventModalContextInterface {
   handleOpenShowAllDataModal: (calendarEvent: EventInterface) => void;
+}
+
+export interface CurrentTimeLineProps {
+  dayDate: Date;
 }
