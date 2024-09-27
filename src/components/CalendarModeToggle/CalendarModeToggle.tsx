@@ -31,4 +31,3 @@ const CalendarModeToggle = () => {
 };
 
 export default CalendarModeToggle;
-
