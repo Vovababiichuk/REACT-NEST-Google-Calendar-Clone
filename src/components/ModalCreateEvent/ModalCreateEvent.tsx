@@ -1,6 +1,6 @@
-import { SketchPicker, ColorResult } from 'react-color';
 import moment from 'moment';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ColorResult, SketchPicker } from 'react-color';
 import { ModalCreateEventProps } from '../../types/types';
 import './ModalCreateEvent.scss';
 
@@ -26,18 +26,13 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title) {
-      alert('Please enter a title.');
-      return;
-    }
-
-    if (!date) {
-      alert('Please select a date.');
-      return;
-    }
-
-    if (!startTime || !endTime) {
-      alert('Please select both start and end time.');
+    if (!title || !date || !startTime || !endTime) {
+      const messages = [
+        !title && 'Please enter a title.',
+        !date && 'Please select a date.',
+        !startTime && !endTime && 'Please select both start and end time.',
+      ].filter(Boolean);
+      alert(messages.join(' '));
       return;
     }
 
@@ -172,4 +167,3 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
 };
 
 export default ModalCreateEvent;
-

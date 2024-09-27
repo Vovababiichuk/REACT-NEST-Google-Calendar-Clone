@@ -1,6 +1,6 @@
-import { SketchPicker, ColorResult } from 'react-color';
 import moment from 'moment';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { ColorResult, SketchPicker } from 'react-color';
 import { ModalUpdateEventProps } from '../../types/types';
 import './ModalUpdateEvent.scss';
 
@@ -166,4 +166,3 @@ const ModalUpdateEvent = ({ calendarEvent, onCloseModal, onEditEvent }: ModalUpd
 };
 
 export default ModalUpdateEvent;
-

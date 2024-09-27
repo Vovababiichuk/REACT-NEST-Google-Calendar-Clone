@@ -62,23 +62,16 @@ const ModalShowAllDataEvent = ({
     const modalWidth = 300;
     const modalHeight = 200;
 
-    let top = calendarEvent?.position?.y || 0;
+    let top = (calendarEvent?.position?.y || 0) + window.scrollY;
     let left = calendarEvent?.position?.x || 0;
 
-    const scrollTop = window.scrollY || window.pageYOffset;
-
-    top += scrollTop;
-
     if (left + modalWidth > window.innerWidth) {
-      left = left - modalWidth;
+      left -= modalWidth;
     }
 
-    if (top + modalHeight > window.innerHeight + scrollTop) {
-      top = window.innerHeight + scrollTop - modalHeight;
-    }
-
-    if (top < scrollTop) {
-      top = scrollTop;
+    top = Math.max(top, window.scrollY);
+    if (top + modalHeight > window.innerHeight + window.scrollY) {
+      top = window.innerHeight + window.scrollY - modalHeight;
     }
 
     return { top, left };
@@ -163,4 +156,3 @@ const ModalShowAllDataEvent = ({
 };
 
 export default ModalShowAllDataEvent;
-
