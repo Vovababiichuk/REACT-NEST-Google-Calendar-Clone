@@ -58,6 +58,11 @@
     }
   }
 
+  &__time {
+    display: flex;
+    align-items: center;
+  }
+
   &__submit-btn {
     margin-left: auto;
     border: none;

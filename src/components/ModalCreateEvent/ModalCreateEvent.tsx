@@ -1,6 +1,8 @@
 import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { ModalCreateEventProps } from '../../types/types';
 import './ModalCreateEvent.scss';
 
@@ -8,7 +10,7 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
   const [color, setColor] = useState('#9380ff');
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState<Date | null>(null);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [description, setDescription] = useState('');
@@ -17,7 +19,8 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
 
   useEffect(() => {
     if (initialEvent) {
-      setDate(moment(initialEvent.dateFrom).format('YYYY-MM-DD'));
+      // setDate(moment(initialEvent.dateFrom).format('YYYY-MM-DD'));
+      setDate(moment(initialEvent.dateFrom).toDate());
       setStartTime(moment(initialEvent.dateFrom).format('HH:mm'));
       setEndTime(moment(initialEvent.dateTo).format('HH:mm'));
     }
@@ -36,12 +39,13 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
       return;
     }
 
-    const dateFromMillis = moment(`${date}T${startTime}`).valueOf();
-    let dateToMillis = moment(`${date}T${endTime}`).valueOf();
+    const formattedDate = moment(date).format('YYYY-MM-DD');
+    const dateFromMillis = moment(`${formattedDate}T${startTime}`).valueOf();
+    let dateToMillis = moment(`${formattedDate}T${endTime}`).valueOf();
 
     if (dateFromMillis >= dateToMillis) {
       if (endTime < startTime) {
-        dateToMillis = moment(`${date}T${endTime}`).add(1, 'day').valueOf();
+        dateToMillis = moment(`${formattedDate}T${endTime}`).add(1, 'day').valueOf();
       } else {
         alert('End time must be after start time.');
         return;
@@ -102,14 +106,13 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
               onChange={e => setTitle(e.target.value)}
             />
             <div className="event-form__time">
-              <input
-                title="Date must be in the future"
-                type="date"
-                name="date"
-                lang="en-US"
+              <DatePicker
+                selected={date}
+                onChange={(date: Date | null) => setDate(date)}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="yyyy-mm-dd"
+                locale="en"
                 className="event-form__field"
-                value={date}
-                onChange={e => setDate(e.target.value)}
               />
               <input
                 title="Start time must be before end time"
