@@ -19,7 +19,6 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
 
   useEffect(() => {
     if (initialEvent) {
-      // setDate(moment(initialEvent.dateFrom).format('YYYY-MM-DD'));
       setDate(moment(initialEvent.dateFrom).toDate());
       setStartTime(moment(initialEvent.dateFrom).format('HH:mm'));
       setEndTime(moment(initialEvent.dateTo).format('HH:mm'));

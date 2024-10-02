@@ -55,7 +55,7 @@ function App() {
           />
           {errorMessage && <div className="error-message overlay">{errorMessage}</div>}
           <SwitchTransition>
-            <CSSTransition key={currentWeekStartDate.getTime()} timeout={300} classNames="fade">
+            <CSSTransition key={currentWeekStartDate.getTime()} timeout={80} classNames="fade">
               <Calendar weekDates={weekDates} calendarEvents={events} />
             </CSSTransition>
           </SwitchTransition>
