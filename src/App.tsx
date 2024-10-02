@@ -53,11 +53,7 @@ function App() {
             currentWeekStartDate={currentWeekStartDate}
           />
           {errorMessage && <div className="error-message overlay">{errorMessage}</div>}
-          {/* <SwitchTransition> */}
-          {/* <CSSTransition key={currentWeekStartDate.getTime()} timeout={80} classNames="fade"> */}
           <Calendar weekDates={weekDates} calendarEvents={events} />
-          {/* </CSSTransition> */}
-          {/* </SwitchTransition> */}
           {isModalCreateOpen && (
             <ModalCreateEvent
               onCloseModal={handleCloseModal}

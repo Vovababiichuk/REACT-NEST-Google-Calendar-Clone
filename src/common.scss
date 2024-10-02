@@ -89,26 +89,3 @@
   box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
   z-index: 900;
 }
-
-/* Animations styles for react-transition-group */
-.fade-enter {
-  opacity: 0;
-  transform: translateX(100%);
-}
-
-.fade-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 100ms, transform 100ms;
-}
-
-.fade-exit {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.fade-exit-active {
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: opacity 100ms, transform 100ms;
-}
