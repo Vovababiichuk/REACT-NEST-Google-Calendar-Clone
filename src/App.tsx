@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { useCallback, useState } from 'react';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import './common.scss';
 import Calendar from './components/Calendar/Calendar';
 import ConfettiComponent from './components/Confetti/Confetti';
@@ -54,11 +53,11 @@ function App() {
             currentWeekStartDate={currentWeekStartDate}
           />
           {errorMessage && <div className="error-message overlay">{errorMessage}</div>}
-          <SwitchTransition>
-            <CSSTransition key={currentWeekStartDate.getTime()} timeout={80} classNames="fade">
-              <Calendar weekDates={weekDates} calendarEvents={events} />
-            </CSSTransition>
-          </SwitchTransition>
+          {/* <SwitchTransition> */}
+          {/* <CSSTransition key={currentWeekStartDate.getTime()} timeout={80} classNames="fade"> */}
+          <Calendar weekDates={weekDates} calendarEvents={events} />
+          {/* </CSSTransition> */}
+          {/* </SwitchTransition> */}
           {isModalCreateOpen && (
             <ModalCreateEvent
               onCloseModal={handleCloseModal}
