@@ -33,7 +33,7 @@ function App() {
   const [showConfetti, setShowConfetti] = useState(false);
 
   const { events, errorMessage, handleCreateEvent, handleUpdateEvent, handleDeleteEvent } =
-    useEvents(handleCloseModal, setShowConfetti); // Pass setShowConfetti here
+    useEvents(handleCloseModal, setShowConfetti);
 
   const weekDates = generateWeekRange(currentWeekStartDate);
 
