@@ -106,7 +106,7 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
                 title="Date must be in the future"
                 type="date"
                 name="date"
-                lang="en"
+                lang="en-US"
                 className="event-form__field"
                 value={date}
                 onChange={e => setDate(e.target.value)}
