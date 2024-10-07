@@ -1,4 +1,5 @@
 import moment from 'moment';
+
 import { WeekProps } from '../../types/types';
 import Day from '../Day/Day';
 import './week.scss';

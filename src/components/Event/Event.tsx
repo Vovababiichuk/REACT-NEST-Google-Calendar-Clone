@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import tinycolor from 'tinycolor-ts';
+
 import { EventProps } from '../../types/types';
 import './event.scss';
 

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
 import { ModalCreateEventProps } from '../../types/types';
 import './ModalCreateEvent.scss';
 

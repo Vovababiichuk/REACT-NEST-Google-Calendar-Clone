@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { useCallback, useState } from 'react';
+
 import './common.scss';
 import Calendar from './components/Calendar/Calendar';
 import ConfettiComponent from './components/Confetti/Confetti';
@@ -16,7 +17,7 @@ import useEvents from './hooks/useEvents';
 import useModals from './hooks/useModals';
 import { generateWeekRange, getWeekStartDate } from './utils/dateUtils';
 
-function App() {
+const App = () => {
   const {
     isModalCreateOpen,
     isModalUpdateOpen,
@@ -82,6 +83,6 @@ function App() {
       </ModalContext.Provider>
     </CurrentWeekStartDateContext.Provider>
   );
-}
+};
 
 export default App;

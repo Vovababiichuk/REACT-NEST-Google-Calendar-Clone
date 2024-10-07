@@ -6,15 +6,15 @@ import {
 } from '../types/types';
 
 export const ModalContext = createContext<ModalContextInterface>({
-  handleOpenCreateModal: () => {},
+  handleOpenCreateModal: () => { },
 });
 
 export const UpdateEventModalContext = createContext<UpdateEventModalContextInterface>({
-  handleOpenUpdateModal: () => {},
+  handleOpenUpdateModal: () => { },
 });
 
 export const ShowAllDataEventModalContext = createContext<ShowAllDataEventModalContextInterface>({
-  handleOpenShowAllDataModal: () => {},
+  handleOpenShowAllDataModal: () => { },
 });
 
 export const CurrentWeekStartDateContext = createContext<Date | null>(null);

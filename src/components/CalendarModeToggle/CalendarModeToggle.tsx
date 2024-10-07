@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import './CalendarModeToggle.scss';
 import clsx from 'clsx';
+import { useState } from 'react';
+
+import './CalendarModeToggle.scss';
 
 const CalendarModeToggle = () => {
   const [activeMode, setActiveMode] = useState('Week');

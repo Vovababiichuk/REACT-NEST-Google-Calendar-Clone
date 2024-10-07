@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
+
 import { ModalUpdateEventProps } from '../../types/types';
 import './ModalUpdateEvent.scss';
 

@@ -48,9 +48,8 @@ export const formatTimeRange = (dateFrom: Date, dateTo: Date): string => {
   const formattedHourTo = hoursTo % 12 || 12;
   const formattedMinutesTo = dateTo.getMinutes() ? `:${formatMins(dateTo.getMinutes())}` : '';
 
-  return `${
-    eventStart.split(/(?<=\d)(?=AM|PM)/)[0]
-  }-${formattedHourTo}${formattedMinutesTo}${periodTo}`;
+  return `${eventStart.split(/(?<=\d)(?=AM|PM)/)[0]
+    }-${formattedHourTo}${formattedMinutesTo}${periodTo}`;
 };
 
 export const formatFirstTime = (date: moment.Moment) =>
