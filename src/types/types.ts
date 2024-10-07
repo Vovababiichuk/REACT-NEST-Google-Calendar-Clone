@@ -57,11 +57,9 @@ export interface EventProps {
 }
 
 export interface HeaderProps {
-  onPreviousWeek: () => void;
-  onNextWeek: () => void;
-  onToday: () => void;
   onOpenCreateModal: () => void;
   currentWeekStartDate: Date;
+  setCurrentWeekStartDate: React.Dispatch<React.SetStateAction<Date>>;
 }
 
 export interface ModalCreateEventProps {
@@ -93,7 +91,7 @@ export interface UpdateEventModalContextInterface {
 }
 
 export interface ShowAllDataEventModalContextInterface {
-  handleOpenShowAllDataModal: (calendarEvent: EventInterface) => void;
+  openShowAllDataModal: (calendarEvent: EventInterface) => void;
 }
 
 export interface CurrentTimeLineProps {

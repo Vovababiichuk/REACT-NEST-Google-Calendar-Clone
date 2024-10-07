@@ -9,7 +9,7 @@ import './hour.scss';
 
 const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
   const { handleOpenCreateModal } = useContext(ModalContext);
-  const { handleOpenShowAllDataModal } = useContext(ShowAllDataEventModalContext);
+  const { openShowAllDataModal } = useContext(ShowAllDataEventModalContext);
 
   const handleClick = () => {
     if (hourEvents.length === 0) {
@@ -19,7 +19,7 @@ const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
 
   const handleEventClick = (eventData: EventInterface, e: React.MouseEvent<HTMLDivElement>) => {
     const { clientX, clientY } = e;
-    handleOpenShowAllDataModal({
+    openShowAllDataModal({
       ...eventData,
       dateFrom: new Date(eventData.dateFrom),
       dateTo: new Date(eventData.dateTo),

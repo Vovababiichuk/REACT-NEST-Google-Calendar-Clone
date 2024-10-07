@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import './common.scss';
 import Calendar from './components/Calendar/Calendar';
@@ -19,18 +19,19 @@ import { generateWeekRange, getWeekStartDate } from './utils/dateUtils';
 
 const App = () => {
   const {
-    isModalCreateOpen,
-    isModalUpdateOpen,
-    isModalShowAllDataOpen,
+    isCreateModalOpen,
+    isUpdateModalOpen,
+    isInfoModalOpen,
     selectedEvent,
     handleOpenCreateModal,
     handleCloseModal,
     handleOpenUpdateModal,
-    handleOpenShowAllDataModal,
+    openShowAllDataModal,
   } = useModals();
 
   const initialDate = getWeekStartDate(moment().toDate());
   const [currentWeekStartDate, setCurrentWeekStartDate] = useState(initialDate);
+
   const [showConfetti, setShowConfetti] = useState(false);
 
   const { events, errorMessage, handleCreateEvent, handleUpdateEvent, handleDeleteEvent } =
@@ -38,38 +39,32 @@ const App = () => {
 
   const weekDates = generateWeekRange(currentWeekStartDate);
 
-  const updateWeekStartDate = useCallback((daysOffset: number) => {
-    setCurrentWeekStartDate(prevDate => moment(prevDate).add(daysOffset, 'days').toDate());
-  }, []);
-
   return (
     <CurrentWeekStartDateContext.Provider value={currentWeekStartDate}>
       <ModalContext.Provider value={{ handleOpenCreateModal }}>
-        <ShowAllDataEventModalContext.Provider value={{ handleOpenShowAllDataModal }}>
+        <ShowAllDataEventModalContext.Provider value={{ openShowAllDataModal }}>
           <Header
-            onPreviousWeek={() => updateWeekStartDate(-7)}
-            onNextWeek={() => updateWeekStartDate(7)}
-            onToday={() => setCurrentWeekStartDate(getWeekStartDate(moment().toDate()))}
             onOpenCreateModal={handleOpenCreateModal}
             currentWeekStartDate={currentWeekStartDate}
+            setCurrentWeekStartDate={setCurrentWeekStartDate}
           />
           {errorMessage && <div className="error-message overlay">{errorMessage}</div>}
           <Calendar weekDates={weekDates} calendarEvents={events} />
-          {isModalCreateOpen && (
+          {isCreateModalOpen && (
             <ModalCreateEvent
               onCloseModal={handleCloseModal}
               onCreateEvent={handleCreateEvent}
               initialEvent={selectedEvent}
             />
           )}
-          {isModalUpdateOpen && selectedEvent && (
+          {isUpdateModalOpen && selectedEvent && (
             <ModalUpdateEvent
               calendarEvent={selectedEvent}
               onCloseModal={handleCloseModal}
               onEditEvent={handleUpdateEvent}
             />
           )}
-          {isModalShowAllDataOpen && selectedEvent && (
+          {isInfoModalOpen && selectedEvent && (
             <ModalShowAllDataEvent
               calendarEvent={selectedEvent}
               onCloseModal={handleCloseModal}

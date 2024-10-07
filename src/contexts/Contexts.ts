@@ -14,7 +14,7 @@ export const UpdateEventModalContext = createContext<UpdateEventModalContextInte
 });
 
 export const ShowAllDataEventModalContext = createContext<ShowAllDataEventModalContextInterface>({
-  handleOpenShowAllDataModal: () => { },
+  openShowAllDataModal: () => { },
 });
 
 export const CurrentWeekStartDateContext = createContext<Date | null>(null);

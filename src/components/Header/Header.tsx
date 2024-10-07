@@ -1,17 +1,23 @@
 import { CalendarPlusIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import moment from 'moment';
+import { useCallback } from 'react';
 
 import { HeaderProps } from '../../types/types';
 import CalendarModeToggle from '../CalendarModeToggle/CalendarModeToggle';
 import './header.scss';
 
 const Header = ({
-  onPreviousWeek,
-  onNextWeek,
-  onToday,
   onOpenCreateModal,
   currentWeekStartDate,
+  setCurrentWeekStartDate,
 }: HeaderProps) => {
+  const updateWeekStartDate = useCallback(
+    (daysOffset: number) => {
+      setCurrentWeekStartDate(prevDate => moment(prevDate).add(daysOffset, 'days').toDate());
+    },
+    [setCurrentWeekStartDate],
+  );
+
   const firstDayOfWeek = moment(currentWeekStartDate);
   const lastDayOfWeek = moment(currentWeekStartDate).add(6, 'days');
 
@@ -32,21 +38,24 @@ const Header = ({
           <span className="create-event-btn__text">Create</span>
         </button>
         <div className="navigation">
-          <button className="navigation__today-btn button" onClick={onToday}>
+          <button
+            className="navigation__today-btn button"
+            onClick={() => setCurrentWeekStartDate(moment().startOf('week').toDate())}
+          >
             Today
           </button>
           <div className="navigation__nav-icons">
             <button
               className="icon-button navigation__nav-icon"
               title="Previous week"
-              onClick={onPreviousWeek}
+              onClick={() => updateWeekStartDate(-7)}
             >
               <ChevronLeft />
             </button>
             <button
               className="icon-button navigation__nav-icon"
               title="Next week"
-              onClick={onNextWeek}
+              onClick={() => updateWeekStartDate(7)}
             >
               <ChevronRight />
             </button>
