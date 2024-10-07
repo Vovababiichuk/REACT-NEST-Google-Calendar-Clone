@@ -11,7 +11,7 @@
       flex-direction: column;
       gap: 10px;
 
-      &__btn-container {
+      &__container {
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -22,9 +22,9 @@
           align-items: center;
           gap: 10px;
 
-          &-edit,
-          &-delete,
-          &-email {
+          .show-event__button_edit,
+          .show-event__button_delete,
+          .show-event__button_email {
             cursor: pointer;
             transition: scale 0.2s ease-in-out;
 

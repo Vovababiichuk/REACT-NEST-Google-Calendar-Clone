@@ -95,19 +95,23 @@ const ModalShowAllDataEvent = ({
     >
       <div className="modal-show__content">
         <div className="show-event">
-          <div className="show-event__btn-container">
+          <div className="show-event__container">
             <div className="show-event__buttons">
               <EditIcon
-                className="show-event__buttons-edit"
+                className="show-event__button show-event__button_edit"
                 size={20}
                 onClick={() => onOpenUpdateModal(calendarEvent)}
               />
               <Trash2
-                className="show-event__buttons-delete"
+                className="show-event__button show-event__button_delete"
                 size={20}
                 onClick={() => calendarEvent?._id && onDeleteEvent(calendarEvent._id)}
               />
-              <Mail className="show-event__buttons-email" size={20} onClick={handleClickEmail} />
+              <Mail
+                className="show-event__button show-event__button_email"
+                size={20}
+                onClick={handleClickEmail}
+              />
             </div>
             <div className="show-event__close">
               <CircleX size={20} onClick={onCloseModal} />
