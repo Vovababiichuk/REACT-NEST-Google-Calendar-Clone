@@ -1,16 +1,19 @@
-.calendar {
-  &__time-scale {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
+.calendar__time-scale {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  width: 48px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: rgb(233, 251, 255);
 }
 
 .time-slot {
+  position: relative;
   height: 60px;
   width: 53px;
   text-align: right;
-  position: relative;
 
   &__time {
     position: absolute;

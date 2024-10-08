@@ -1,16 +1,5 @@
-.calendar {
+.calendar__week {
   display: flex;
-  flex-direction: column;
-  height: calc(100vh - 60px);
-
-  &__week-container {
-    display: flex;
-    width: 100%;
-    height: fit-content;
-  }
-
-  &__week {
-    display: flex;
-    flex: 1;
-  }
+  flex: 1;
+  border-radius: 20px;
 }

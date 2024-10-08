@@ -1,7 +1,4 @@
 .calendar__navigation {
-  display: flex;
-  flex-direction: column;
-
   &-mode {
     display: flex;
     justify-content: flex-end;
@@ -10,14 +7,7 @@
 }
 
 .calendar {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 60px);
-
   &__header {
-    display: flex;
-    height: 100px;
-    padding-left: 48px;
     margin: 0 10px;
     position: relative;
 
