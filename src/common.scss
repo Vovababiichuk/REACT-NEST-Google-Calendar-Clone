@@ -9,8 +9,8 @@
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: #eee;
-    color: #000;
+    background-color: $gray;
+    color: $black;
   }
 }
 
@@ -28,11 +28,11 @@
   align-items: center;
 
   &__content {
-    background: #fff;
+    background: $white;
     padding: 12px;
-    border: 1px solid #9380ff;
+    border: 1px solid $primary-color;
     border-radius: 20px;
-    box-shadow: 0 0 10px rgba(129, 106, 255, 0.5);
+    box-shadow: 0 0 10px $modal-content-box-shadow;
   }
 }
 
@@ -42,16 +42,16 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #a2ecff5b;
+  background-color: $overlay-background;
   z-index: 10;
 }
 
 .popup {
   &__content {
     position: absolute;
-    background: #fff;
+    background: $white;
     padding: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid $modal-content-color;
     border-radius: 8px;
   }
 }
@@ -76,16 +76,16 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  color: red;
-  background-color: #ffe6e6;
+  color: $red;
+  background-color: $light-red;
   padding: 10px;
-  border: 1px solid red;
+  border: 1px solid $red;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 500px;
   height: 80px;
-  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 5px $error-message-box-shadow;
   z-index: 900;
 }

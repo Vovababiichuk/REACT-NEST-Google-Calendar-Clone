@@ -14,8 +14,8 @@
 
 .create-event-btn {
   padding: 0 22px;
-  background-color: #a3d4f9;
-  color: #000;
+  background-color: $secondary-color;
+  color: $black;
   display: flex;
   align-items: center;
 
@@ -37,8 +37,8 @@
   &__today-btn {
     margin-left: 28px;
     padding: 0 36px;
-    background-color: #131313;
-    color: #fff;
+    background-color: $black-text;
+    color: $white;
   }
 
   &__nav-icon {
@@ -58,7 +58,7 @@
   &__displayed-month {
     font-size: 30px;
     font-weight: 900;
-    color: rgb(99, 99, 99);
+    color: $text-gray;
   }
 
   &__displayed-year {
@@ -66,7 +66,7 @@
     font-weight: bold;
     -webkit-background-clip: text;
     background-clip: text;
-    color: #a3d4f9;
-    text-shadow: 1px 1px 2px #636100;
+    color: $secondary-color;
+    text-shadow: 1px 1px 2px $text-shadow-color;
   }
 }

@@ -13,7 +13,7 @@ const ModalEvent = ({
   onEditEvent,
   initialEvent,
 }: ModalEventProps) => {
-  const [color, setColor] = useState('#9380ff');
+  const [color, setColor] = useState('$primary-color');
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [title, setTitle] = useState('');
   const [date, setDate] = useState<Date | null>(null);
@@ -31,7 +31,7 @@ const ModalEvent = ({
       setEndTime(moment(initialEvent.dateTo).format('HH:mm'));
       setDescription(initialEvent.description || '');
       setTag(initialEvent.tag || '');
-      setColor(initialEvent.color || '#9380ff');
+      setColor(initialEvent.color || '$primary-color');
     } else {
       setTitle('');
       setDescription('');
@@ -39,7 +39,7 @@ const ModalEvent = ({
       setStartTime('');
       setEndTime('');
       setTag('');
-      setColor('#9380ff');
+      setColor('$primary-color');
     }
   }, [initialEvent]);
 

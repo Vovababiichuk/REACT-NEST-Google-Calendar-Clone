@@ -18,7 +18,7 @@
       transform: rotate(270deg);
       font-size: 14px;
       font-weight: bold;
-      color: rgb(117, 117, 116);
+      color: $gmt-color;
     }
 
     .calendar__day-label {
@@ -34,29 +34,29 @@
     .calendar__day-label:nth-child(1),
     .calendar__day-label:nth-child(2),
     .calendar__day-label:nth-child(3) {
-      background-color: #cadf66;
+      background-color: $green;
     }
 
     .calendar__day-label:nth-child(4) {
-      background: linear-gradient(to right, #cadf66, #b1c6d6);
+      background: linear-gradient(to right, $green, $blue);
     }
 
     .calendar__day-label:nth-child(5),
     .calendar__day-label:nth-child(6),
     .calendar__day-label:nth-child(7),
     .calendar__day-label:nth-child(8) {
-      background-color: #b1c6d6;
+      background-color: $blue;
     }
   }
 
   &__day {
     position: relative;
     flex: 1;
-    border-left: 1px solid #eee;
+    border-left: 1px solid $gray;
   }
 }
 
 .calendar__day-label.today {
-  background: #fff !important;
-  color: #9380ff;
+  background: $white !important;
+  color: $primary-color;
 }

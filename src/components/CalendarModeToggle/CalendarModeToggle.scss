@@ -4,7 +4,7 @@
   justify-content: flex-end;
   gap: 10px;
   max-width: max-content;
-  background-color: #b1c6d6;
+  background-color: $blue;
   padding: 6px 32px;
   border-radius: 26px;
   margin: 0 10px 8px;
@@ -23,5 +23,5 @@
 }
 
 .button-mode {
-  background-color: #fff;
+  background-color: $white;
 }

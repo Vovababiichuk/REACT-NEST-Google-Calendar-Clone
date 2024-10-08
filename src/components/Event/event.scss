@@ -19,12 +19,11 @@
     font-weight: bold;
     border-radius: 6px;
     padding: 1px 4px;
-    background-color: #fff;
-
+    background-color: $white;
   }
 
   &__time {
-    color: #ffffff;
+    color: $white;
     font-size: 14px;
   }
 }
@@ -39,9 +38,9 @@
   font-size: 16px;
 
   &__title {
-    background-color: #f5f5f5;
-    color: #242424;
-    box-shadow: 0 0 8px rgb(255, 255, 255);
+    background-color: $light-gray;
+    color: $dark-gray;
+    box-shadow: 0 0 8px $white-text;
   }
 
   &__time {
@@ -54,7 +53,7 @@
 
     .event__title {
       background-color: transparent;
-      color: #fff;
+      color: $white;
       box-shadow: none;
     }
   }

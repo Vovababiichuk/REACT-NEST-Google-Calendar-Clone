@@ -22,7 +22,7 @@ const ConfettiComponent = ({ show, onHide }: ConfettiComponentProps) => {
         numberOfPieces={300}
         gravity={0.9}
         wind={0.04}
-        colors={['#ff0000', '#00ff00', '#0000ff']}
+        colors={['#ff0000', '#00ff00', '$black0ff']}
         recycle={false}
         initialVelocityY={20}
         friction={0.95}

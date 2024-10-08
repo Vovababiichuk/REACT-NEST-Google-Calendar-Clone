@@ -6,9 +6,9 @@
   padding-top: 100px;
 
   &__content {
-    background: #fff;
+    background: $white;
     padding: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid $modal-content-color;
     border-radius: 8px;
   }
 }
@@ -19,7 +19,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #cccccc45;
+  background-color: $overlay-background-blur;
   z-index: 10;
 }
 
@@ -49,12 +49,12 @@
     border: none;
     border-radius: 8px;
     padding: 10px;
-    background-color: #f8ffcf;
+    background-color: $light-yellow;
 
     &:focus {
       outline: none;
       border: none;
-      background-color: #dbd6ff;
+      background-color: $purple;
     }
   }
 
@@ -66,8 +66,8 @@
   &__submit-btn {
     margin-left: auto;
     border: none;
-    color: #fff;
-    background-color: #9380ff;
+    color: $white;
+    background-color: $primary-color;
     border: none;
     cursor: pointer;
     margin-right: 8px;

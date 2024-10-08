@@ -1,10 +1,10 @@
 .modal-show {
   &__content {
-    background: #fff;
+    background: $white;
     padding: 12px;
-    border: 1px solid #9380ff;
+    border: 1px solid $primary-color;
     border-radius: 20px;
-    box-shadow: 0 0 10px rgba(129, 106, 255, 0.5);
+    box-shadow: 0 0 10px $modal-content-box-shadow;
 
     .show-event {
       display: flex;

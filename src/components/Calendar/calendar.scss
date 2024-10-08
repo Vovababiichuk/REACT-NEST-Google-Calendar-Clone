@@ -19,7 +19,7 @@
     display: flex;
     width: 100%;
     height: auto;
-    background-color: #fff;
+    background-color: $white;
     margin: 4px 10px 40px;
     border-radius: 20px;
   }
@@ -27,13 +27,13 @@
   &__day {
     position: relative;
     flex: 1;
-    border-left: 1px solid #eee;
+    border-left: 1px solid $gray;
   }
 
   &__time-slot:not(:last-of-type) {
     position: relative;
     height: 60px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $gray;
   }
 
   &__day-label {
