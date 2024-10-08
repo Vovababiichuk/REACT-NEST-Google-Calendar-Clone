@@ -12,16 +12,16 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 
 import { updateEvent } from '../../gateway/events';
-import { ModalShowAllDataEventInterface } from '../../types/types';
-import './ModalShowAllDataEvent.scss';
+import { ModalInfoEventInterface } from '../../types/types';
+import './ModalInfoEvent.scss';
 
-const ModalShowAllDataEvent = ({
+const ModalInfoEvent = ({
   calendarEvent,
   onCloseModal,
   onDeleteEvent,
   onEditEvent,
   onOpenUpdateModal,
-}: ModalShowAllDataEventInterface) => {
+}: ModalInfoEventInterface) => {
   const [color, setColor] = useState('#c5bdf5');
   const [title, setTitle] = useState('');
   const [dateFormatted, setDateFormatted] = useState('');
@@ -160,4 +160,4 @@ const ModalShowAllDataEvent = ({
   );
 };
 
-export default ModalShowAllDataEvent;
+export default ModalInfoEvent;

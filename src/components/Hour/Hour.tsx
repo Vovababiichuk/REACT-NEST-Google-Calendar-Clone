@@ -8,12 +8,12 @@ import Event from '../Event/Event';
 import './hour.scss';
 
 const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
-  const { handleOpenCreateModal } = useContext(ModalContext);
+  const { handleOpenModal } = useContext(ModalContext);
   const { openShowAllDataModal } = useContext(ShowAllDataEventModalContext);
 
   const handleClick = () => {
     if (hourEvents.length === 0) {
-      handleOpenCreateModal(dataDay, dataHour);
+      handleOpenModal(undefined, dataDay, dataHour);
     }
   };
 

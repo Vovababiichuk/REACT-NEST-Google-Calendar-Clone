@@ -4,18 +4,19 @@ import { CurrentWeekStartDateContext } from '../contexts/Contexts';
 import { EventInterface } from '../types/types';
 
 const useModals = () => {
-  const [isCreateModalOpen, setisCreateModalOpen] = useState(false);
-  const [isUpdateModalOpen, setisUpdateModalOpen] = useState(false);
-  const [isInfoModalOpen, setisInfoModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<EventInterface | null>(null);
 
   const currentWeekStartDate = useContext(CurrentWeekStartDateContext) || new Date();
 
-  const handleOpenCreateModal = (selectedDay?: number, selectedHour?: number) => {
-    setisCreateModalOpen(true);
-    setisInfoModalOpen(false);
+  const handleOpenModal = (calendarEvent?: EventInterface, selectedDay?: number, selectedHour?: number) => {
+    setIsModalOpen(true);
+    setIsInfoModalOpen(false);
 
-    if (selectedDay !== undefined && selectedHour !== undefined) {
+    if (calendarEvent) {
+      setSelectedEvent(calendarEvent);
+    } else if (selectedDay !== undefined && selectedHour !== undefined) {
       const selectedDate = moment(currentWeekStartDate)
         .date(selectedDay)
         .hour(selectedHour)
@@ -37,38 +38,25 @@ const useModals = () => {
   };
 
   const handleCloseModal = () => {
-    setisCreateModalOpen(false);
-    setisUpdateModalOpen(false);
+    setIsModalOpen(false);
     setSelectedEvent(null);
-  };
-
-  const handleOpenUpdateModal = (calendarEvent: EventInterface) => {
-    setisInfoModalOpen(false);
-    if (calendarEvent) {
-      setSelectedEvent(calendarEvent);
-      setisUpdateModalOpen(true);
-    } else {
-      console.log('No calendar event provided');
-    }
   };
 
   const openShowAllDataModal = (calendarEvent: EventInterface) => {
     if (calendarEvent) {
       setSelectedEvent(calendarEvent);
-      setisInfoModalOpen(true);
+      setIsInfoModalOpen(true);
     } else {
       console.log('No calendar event provided');
     }
   };
 
   return {
-    isCreateModalOpen,
-    isUpdateModalOpen,
+    isModalOpen,
     isInfoModalOpen,
     selectedEvent,
-    handleOpenCreateModal,
+    handleOpenModal,
     handleCloseModal,
-    handleOpenUpdateModal,
     openShowAllDataModal,
   };
 };

@@ -5,9 +5,8 @@ import './common.scss';
 import Calendar from './components/Calendar/Calendar';
 import ConfettiComponent from './components/Confetti/Confetti';
 import Header from './components/Header/Header';
-import ModalCreateEvent from './components/ModalCreateEvent/ModalCreateEvent';
-import ModalShowAllDataEvent from './components/ModalShowAllDataEvent/ModalShowAllDataEvent';
-import ModalUpdateEvent from './components/ModalUpdateEvent/ModalUpdateEvent';
+import ModalEvent from './components/ModalEvent/ModalEvent';
+import ModalInfoEvent from './components/ModalInfoEvent/ModalInfoEvent';
 import {
   CurrentWeekStartDateContext,
   ModalContext,
@@ -19,13 +18,11 @@ import { generateWeekRange, getWeekStartDate } from './utils/dateUtils';
 
 const App = () => {
   const {
-    isCreateModalOpen,
-    isUpdateModalOpen,
+    isModalOpen,
     isInfoModalOpen,
     selectedEvent,
-    handleOpenCreateModal,
+    handleOpenModal,
     handleCloseModal,
-    handleOpenUpdateModal,
     openShowAllDataModal,
   } = useModals();
 
@@ -41,36 +38,30 @@ const App = () => {
 
   return (
     <CurrentWeekStartDateContext.Provider value={currentWeekStartDate}>
-      <ModalContext.Provider value={{ handleOpenCreateModal }}>
+      <ModalContext.Provider value={{ handleOpenModal }}>
         <ShowAllDataEventModalContext.Provider value={{ openShowAllDataModal }}>
           <Header
-            onOpenCreateModal={handleOpenCreateModal}
+            onOpenCreateModal={() => handleOpenModal(undefined, undefined, undefined)}
             currentWeekStartDate={currentWeekStartDate}
             setCurrentWeekStartDate={setCurrentWeekStartDate}
           />
           {errorMessage && <div className="error-message overlay">{errorMessage}</div>}
           <Calendar weekDates={weekDates} calendarEvents={events} />
-          {isCreateModalOpen && (
-            <ModalCreateEvent
+          {isModalOpen && (
+            <ModalEvent
               onCloseModal={handleCloseModal}
               onCreateEvent={handleCreateEvent}
+              onEditEvent={handleUpdateEvent}
               initialEvent={selectedEvent}
             />
           )}
-          {isUpdateModalOpen && selectedEvent && (
-            <ModalUpdateEvent
-              calendarEvent={selectedEvent}
-              onCloseModal={handleCloseModal}
-              onEditEvent={handleUpdateEvent}
-            />
-          )}
           {isInfoModalOpen && selectedEvent && (
-            <ModalShowAllDataEvent
+            <ModalInfoEvent
               calendarEvent={selectedEvent}
               onCloseModal={handleCloseModal}
               onDeleteEvent={handleDeleteEvent}
               onEditEvent={handleUpdateEvent}
-              onOpenUpdateModal={handleOpenUpdateModal}
+              onOpenUpdateModal={handleOpenModal}
             />
           )}
           <ConfettiComponent show={showConfetti} onHide={() => setShowConfetti(false)} />

@@ -1,13 +1,18 @@
 import moment from 'moment';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { ModalCreateEventProps } from '../../types/types';
-import './ModalCreateEvent.scss';
+import { EventInterface, ModalEventProps } from '../../types/types';
+import './ModalEvent.scss';
 
-const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCreateEventProps) => {
+const ModalEvent = ({
+  onCloseModal,
+  onCreateEvent,
+  onEditEvent,
+  initialEvent,
+}: ModalEventProps) => {
   const [color, setColor] = useState('#9380ff');
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [title, setTitle] = useState('');
@@ -20,20 +25,32 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
 
   useEffect(() => {
     if (initialEvent) {
+      setTitle(initialEvent.title || '');
       setDate(moment(initialEvent.dateFrom).toDate());
       setStartTime(moment(initialEvent.dateFrom).format('HH:mm'));
       setEndTime(moment(initialEvent.dateTo).format('HH:mm'));
+      setDescription(initialEvent.description || '');
+      setTag(initialEvent.tag || '');
+      setColor(initialEvent.color || '#9380ff');
+    } else {
+      setTitle('');
+      setDescription('');
+      setDate(null);
+      setStartTime('');
+      setEndTime('');
+      setTag('');
+      setColor('#9380ff');
     }
   }, [initialEvent]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!title || !date || !startTime || !endTime) {
       const messages = [
-        !title && 'Please enter a title.',
-        !date && 'Please select a date.',
-        !startTime && !endTime && 'Please select both start and end time.',
+        !title && 'Будь ласка, введіть заголовок.',
+        !date && 'Будь ласка, виберіть дату.',
+        !startTime && !endTime && 'Будь ласка, виберіть час початку та закінчення.',
       ].filter(Boolean);
       alert(messages.join(' '));
       return;
@@ -47,12 +64,12 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
       if (endTime < startTime) {
         dateToMillis = moment(`${formattedDate}T${endTime}`).add(1, 'day').valueOf();
       } else {
-        alert('End time must be after start time.');
+        alert('Час закінчення має бути пізніше часу початку.');
         return;
       }
     }
 
-    const newEvent = {
+    const newEvent: EventInterface = {
       title,
       description,
       dateFrom: new Date(dateFromMillis),
@@ -61,7 +78,16 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
       color,
     };
 
-    onCreateEvent(newEvent);
+    try {
+      if (initialEvent && initialEvent._id) {
+        await onEditEvent(initialEvent._id, newEvent);
+      } else {
+        await onCreateEvent(newEvent);
+      }
+      onCloseModal();
+    } catch (error) {
+      console.error('Помилка при збереженні події:', error);
+    }
   };
 
   const handleColorChange = (color: ColorResult) => {
@@ -161,7 +187,7 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
               </div>
             </div>
             <button type="submit" className="event-form__submit-btn">
-              Create
+              {initialEvent?._id ? 'Save' : 'Create'}
             </button>
           </form>
         </div>
@@ -170,4 +196,4 @@ const ModalCreateEvent = ({ onCloseModal, onCreateEvent, initialEvent }: ModalCr
   );
 };
 
-export default ModalCreateEvent;
+export default ModalEvent;

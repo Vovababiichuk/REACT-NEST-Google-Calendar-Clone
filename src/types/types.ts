@@ -74,7 +74,7 @@ export interface ModalUpdateEventProps {
   onEditEvent: (eventId: string, updatedData: EventInterface) => void;
 }
 
-export interface ModalShowAllDataEventInterface {
+export interface ModalInfoEventInterface {
   calendarEvent: EventInterface;
   onCloseModal: () => void;
   onDeleteEvent: (eventId: string) => void;
@@ -82,8 +82,12 @@ export interface ModalShowAllDataEventInterface {
   onOpenUpdateModal: (calendarEvent: EventInterface) => void;
 }
 
+// export interface ModalContextInterface {
+//   handleOpenCreateModal: (selectedDay?: number, selectedHour?: number) => void;
+// }
+
 export interface ModalContextInterface {
-  handleOpenCreateModal: (selectedDay?: number, selectedHour?: number) => void;
+  handleOpenModal: (event?: EventInterface, selectedDay?: number, selectedHour?: number) => void;
 }
 
 export interface UpdateEventModalContextInterface {
@@ -101,4 +105,11 @@ export interface CurrentTimeLineProps {
 export type ConfettiComponentProps = {
   show: boolean;
   onHide: () => void;
+}
+
+export interface ModalEventProps {
+  onCloseModal: () => void;
+  onCreateEvent: (eventData: EventInterface) => Promise<void>;
+  onEditEvent: (eventId: string, updatedData: EventInterface) => Promise<void>;
+  initialEvent?: EventInterface | null;
 }

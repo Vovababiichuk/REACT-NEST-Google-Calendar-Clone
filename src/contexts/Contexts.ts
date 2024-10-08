@@ -6,7 +6,7 @@ import {
 } from '../types/types';
 
 export const ModalContext = createContext<ModalContextInterface>({
-  handleOpenCreateModal: () => { },
+  handleOpenModal: () => { },
 });
 
 export const UpdateEventModalContext = createContext<UpdateEventModalContextInterface>({
