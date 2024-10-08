@@ -1,11 +1,7 @@
-// ConfettiComponent.tsx
 import { useEffect } from 'react';
 import Confetti from 'react-confetti';
 
-interface ConfettiComponentProps {
-  show: boolean;
-  onHide: () => void;
-}
+import { ConfettiComponentProps } from '../../types/types';
 
 const ConfettiComponent = ({ show, onHide }: ConfettiComponentProps) => {
   useEffect(() => {

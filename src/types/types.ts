@@ -1,4 +1,4 @@
-export interface EventInterface {
+export type EventInterface = {
   _id?: string;
   title: string;
   dateFrom: Date;
@@ -96,4 +96,9 @@ export interface ShowAllDataEventModalContextInterface {
 
 export interface CurrentTimeLineProps {
   dayDate: Date;
+}
+
+export type ConfettiComponentProps = {
+  show: boolean;
+  onHide: () => void;
 }
