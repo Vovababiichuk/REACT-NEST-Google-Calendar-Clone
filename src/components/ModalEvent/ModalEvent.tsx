@@ -13,44 +13,69 @@ const ModalEvent = ({
   onEditEvent,
   initialEvent,
 }: ModalEventProps) => {
-  const [color, setColor] = useState('$primary-color');
+  const [eventData, setEventData] = useState({
+    title: '',
+    date: null as Date | null,
+    startTime: '',
+    endTime: '',
+    description: '',
+    tag: '',
+    color: '#9380ff',
+  });
   const [showColorPicker, setShowColorPicker] = useState(false);
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState<Date | null>(null);
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
-  const [description, setDescription] = useState('');
-  const [tag, setTag] = useState('');
   const colorPickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (initialEvent) {
-      setTitle(initialEvent.title || '');
-      setDate(moment(initialEvent.dateFrom).toDate());
-      setStartTime(moment(initialEvent.dateFrom).format('HH:mm'));
-      setEndTime(moment(initialEvent.dateTo).format('HH:mm'));
-      setDescription(initialEvent.description || '');
-      setTag(initialEvent.tag || '');
-      setColor(initialEvent.color || '$primary-color');
+      setEventData({
+        title: initialEvent.title || '',
+        date: moment(initialEvent.dateFrom).toDate(),
+        startTime: moment(initialEvent.dateFrom).format('HH:mm'),
+        endTime: moment(initialEvent.dateTo).format('HH:mm'),
+        description: initialEvent.description || '',
+        tag: initialEvent.tag || '',
+        color: initialEvent.color || '#9380ff',
+      });
     } else {
-      setTitle('');
-      setDescription('');
-      setDate(null);
-      setStartTime('');
-      setEndTime('');
-      setTag('');
-      setColor('$primary-color');
+      setEventData({
+        title: '',
+        date: null,
+        startTime: '',
+        endTime: '',
+        description: '',
+        tag: '',
+        color: '#9380ff',
+      });
     }
   }, [initialEvent]);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setEventData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setEventData(prev => ({ ...prev, date }));
+  };
+
+  const handleColorChange = (color: ColorResult) => {
+    setEventData(prev => ({ ...prev, color: color.hex }));
+  };
+
+  const handleShowColorPicker = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowColorPicker(prev => !prev);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const { title, date, startTime, endTime, description, tag, color } = eventData;
 
     if (!title || !date || !startTime || !endTime) {
       const messages = [
-        !title && 'Будь ласка, введіть заголовок.',
-        !date && 'Будь ласка, виберіть дату.',
-        !startTime && !endTime && 'Будь ласка, виберіть час початку та закінчення.',
+        !title && 'Enter a title.',
+        !date && 'Enter a date.',
+        !startTime && !endTime && 'Enter a time.',
       ].filter(Boolean);
       alert(messages.join(' '));
       return;
@@ -64,7 +89,7 @@ const ModalEvent = ({
       if (endTime < startTime) {
         dateToMillis = moment(`${formattedDate}T${endTime}`).add(1, 'day').valueOf();
       } else {
-        alert('Час закінчення має бути пізніше часу початку.');
+        alert('End time must be greater than start time.');
         return;
       }
     }
@@ -86,17 +111,8 @@ const ModalEvent = ({
       }
       onCloseModal();
     } catch (error) {
-      console.error('Помилка при збереженні події:', error);
+      console.error('Error creating event:', error);
     }
-  };
-
-  const handleColorChange = (color: ColorResult) => {
-    setColor(color.hex);
-  };
-
-  const handleShowColorPicker = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setShowColorPicker(prevState => !prevState);
   };
 
   useEffect(() => {
@@ -128,13 +144,13 @@ const ModalEvent = ({
               name="title"
               placeholder="Title..."
               className="event-form__field"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
+              value={eventData.title}
+              onChange={handleChange}
             />
             <div className="event-form__time">
               <DatePicker
-                selected={date}
-                onChange={(date: Date | null) => setDate(date)}
+                selected={eventData.date}
+                onChange={handleDateChange}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="yyyy-mm-dd"
                 locale="en"
@@ -145,8 +161,8 @@ const ModalEvent = ({
                 type="time"
                 name="startTime"
                 className="event-form__field"
-                value={startTime}
-                onChange={e => setStartTime(e.target.value)}
+                value={eventData.startTime}
+                onChange={handleChange}
               />
               <span>-</span>
               <input
@@ -154,36 +170,38 @@ const ModalEvent = ({
                 type="time"
                 name="endTime"
                 className="event-form__field"
-                value={endTime}
-                onChange={e => setEndTime(e.target.value)}
+                value={eventData.endTime}
+                onChange={handleChange}
               />
             </div>
             <textarea
               name="description"
               placeholder="Description..."
               className="event-form__field"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
+              value={eventData.description}
+              onChange={handleChange}
             />
             <div>
               <input
                 title="Add tags"
                 className="event-form__field"
                 type="text"
-                name="tags"
+                name="tag"
                 placeholder="Tag..."
-                value={tag}
-                onChange={e => setTag(e.target.value)}
+                value={eventData.tag}
+                onChange={handleChange}
               />
             </div>
             <div className="event-form__color">
               <span
                 className="event-form__color-base"
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: eventData.color }}
                 onClick={handleShowColorPicker}
               ></span>
               <div className="event-form__color-picker" ref={colorPickerRef}>
-                {showColorPicker && <SketchPicker color={color} onChange={handleColorChange} />}
+                {showColorPicker && (
+                  <SketchPicker color={eventData.color} onChange={handleColorChange} />
+                )}
               </div>
             </div>
             <button type="submit" className="event-form__submit-btn">

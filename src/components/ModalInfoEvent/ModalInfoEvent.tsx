@@ -22,26 +22,30 @@ const ModalInfoEvent = ({
   onEditEvent,
   onOpenUpdateModal,
 }: ModalInfoEventInterface) => {
-  const [color, setColor] = useState('#c5bdf5');
-  const [title, setTitle] = useState('');
-  const [dateFormatted, setDateFormatted] = useState('');
-  const [timeRange, setTimeRange] = useState('');
-  const [description, setDescription] = useState('');
-  const [tag, setTag] = useState('');
-  const [done, setDone] = useState(false);
+  const [eventData, setEventData] = useState({
+    color: '#c5bdf5',
+    title: '',
+    dateFormatted: '',
+    timeRange: '',
+    description: '',
+    tag: '',
+    done: false,
+  });
 
   useEffect(() => {
     if (calendarEvent) {
-      setTitle(calendarEvent.title || '');
       const eventStart = moment(calendarEvent.dateFrom);
       const eventEnd = moment(calendarEvent.dateTo);
 
-      setDateFormatted(eventStart.format('dddd, MMMM D'));
-      setTimeRange(`${eventStart.format('h:mm')} – ${eventEnd.format('h:mmA')}`);
-      setDescription(calendarEvent.description || '');
-      setTag(calendarEvent.tag || '');
-      setColor(calendarEvent.color || '#c5bdf5');
-      setDone(calendarEvent.done || false);
+      setEventData({
+        title: calendarEvent.title || '',
+        dateFormatted: eventStart.format('dddd, MMMM D'),
+        timeRange: `${eventStart.format('h:mm')} – ${eventEnd.format('h:mmA')}`,
+        description: calendarEvent.description || '',
+        tag: calendarEvent.tag || '',
+        color: calendarEvent.color || '#c5bdf5',
+        done: calendarEvent.done || false,
+      });
     }
   }, [calendarEvent]);
 
@@ -50,9 +54,10 @@ const ModalInfoEvent = ({
       try {
         const updatedEvent = await updateEvent(calendarEvent._id, {
           ...calendarEvent,
-          done: !done,
+          done: !eventData.done,
         });
         onEditEvent(calendarEvent._id, updatedEvent);
+        setEventData(prevData => ({ ...prevData, done: !prevData.done }));
       } catch (error) {
         console.error('Error updating event status:', error);
       }
@@ -118,20 +123,23 @@ const ModalInfoEvent = ({
             </div>
           </div>
           <div className="show-event__heading">
-            <span className="show-event__heading-color" style={{ backgroundColor: color }}></span>
-            <h2 className="show-event__heading-title">{title}</h2>
+            <span
+              className="show-event__heading-color"
+              style={{ backgroundColor: eventData.color }}
+            ></span>
+            <h2 className="show-event__heading-title">{eventData.title}</h2>
           </div>
           <div className="show-event__info">
             <CalendarClock size={18} />
-            <span className="show-event__info-date">{dateFormatted}</span>
-            <span className="show-event__info-time">{timeRange}</span>
+            <span className="show-event__info-date">{eventData.dateFormatted}</span>
+            <span className="show-event__info-time">{eventData.timeRange}</span>
           </div>
           <div className="show-event__description-container">
             <AlignLeft className="show-event__description-icon" size={20} />
             <textarea
               className="show-event__description"
               rows={3}
-              value={description}
+              value={eventData.description}
               readOnly
               title="Description"
               placeholder="no description..."
@@ -142,16 +150,16 @@ const ModalInfoEvent = ({
             <input
               className="show-event__tag-input"
               type="text"
-              value={tag}
+              value={eventData.tag}
               readOnly
               placeholder="no tag..."
               title="Tag"
             />
           </div>
-          <div className="show-event__mark" style={{ color: color }}>
+          <div className="show-event__mark" style={{ color: eventData.color }}>
             <CalendarCheck className="show-event__mark-icon" size={16} />
             <span className="show-event__mark-btn" onClick={handleMarkCompleted}>
-              {done ? 'Mark uncompleted' : 'Mark completed'}
+              {eventData.done ? 'Mark uncompleted' : 'Mark completed'}
             </span>
           </div>
         </div>
