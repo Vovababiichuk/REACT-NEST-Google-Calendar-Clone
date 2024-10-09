@@ -1,6 +1,5 @@
 import moment from 'moment';
 import React, { useContext } from 'react';
-
 import { ModalContext, ShowAllDataEventModalContext } from '../../contexts/Contexts';
 import { EventInterface, HourProps } from '../../types/types';
 import { getFormattedTimeRange } from '../../utils/dateUtils';

@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-
 import { CurrentTimeLineProps } from '../../types/types';
 import './CurrentTimeLine.scss';
 

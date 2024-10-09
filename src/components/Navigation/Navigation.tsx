@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-
 import { NavigationProps } from '../../types/types';
 import { days } from '../../utils/dateUtils';
 import './navigation.scss';

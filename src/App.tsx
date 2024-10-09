@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { useState } from 'react';
-
-import './common.scss';
+import useEvents from './hooks/useEvents';
+import useModals from './hooks/useModals';
 import Calendar from './components/Calendar/Calendar';
 import ConfettiComponent from './components/Confetti/Confetti';
 import Header from './components/Header/Header';
@@ -12,9 +12,8 @@ import {
   ModalContext,
   ShowAllDataEventModalContext,
 } from './contexts/Contexts';
-import useEvents from './hooks/useEvents';
-import useModals from './hooks/useModals';
 import { generateWeekRange, getWeekStartDate } from './utils/dateUtils';
+import './common.scss';
 
 const App = () => {
   const {

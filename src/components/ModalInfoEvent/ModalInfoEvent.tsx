@@ -10,7 +10,6 @@ import {
 } from 'lucide-react';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-
 import { updateEvent } from '../../gateway/events';
 import { ModalInfoEventInterface } from '../../types/types';
 import './ModalInfoEvent.scss';

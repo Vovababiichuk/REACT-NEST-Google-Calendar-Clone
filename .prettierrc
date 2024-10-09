@@ -1,9 +1,20 @@
 {
-  "importOrder": ["^components/(.*)$", "^[./]"],
-  "importOrderSeparation": true,
+  "importOrder": [
+    "^@?\\w",
+    "<THIRD_PARTY_MODULES>",
+    "^react$",
+    "^.*use.*$",
+    "^components/(.*)$",
+    "^contexts/(.*)$",
+    "^utils/(.*)$",
+    "^[./](?!.*\\.(s?css)$)",
+    "^\\./.*\\.(s?css)$"
+  ],
+  "importOrderSeparation": false,
   "importOrderSortSpecifiers": true,
+  "importOrderGroupNamespaceSpecifiers": false,
+  "importOrderCaseInsensitive": true,
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
-
   "trailingComma": "all",
   "printWidth": 100,
   "tabWidth": 2,

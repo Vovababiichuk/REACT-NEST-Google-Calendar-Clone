@@ -1,5 +1,4 @@
 import moment from 'moment';
-
 import { DayProps } from '../../types/types';
 import CurrentTimeLine from '../CurrentTimeLine/CurrentTimeLine';
 import Hour from '../Hour/Hour';

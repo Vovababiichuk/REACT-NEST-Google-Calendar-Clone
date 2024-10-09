@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-
 import './CalendarModeToggle.scss';
 
 const CalendarModeToggle = () => {
