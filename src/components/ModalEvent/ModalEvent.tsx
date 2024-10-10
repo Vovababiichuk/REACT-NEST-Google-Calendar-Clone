@@ -1,9 +1,11 @@
 import moment from 'moment';
-import React, { useEffect, useRef, useState } from 'react';
-import { ColorResult, SketchPicker } from 'react-color';
+import React, { useEffect, useState } from 'react';
+import { ColorResult } from 'react-color';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { EventInterface, ModalEventProps } from '../../types/types';
+import { validateEventData, validateEventTime } from '../../utils/dateUtils';
+import ColorPicker from '../ColorPicker/ColorPicker';
 import './ModalEvent.scss';
 
 const ModalEvent = ({
@@ -21,8 +23,6 @@ const ModalEvent = ({
     tag: '',
     color: '#9380ff',
   });
-  const [showColorPicker, setShowColorPicker] = useState(false);
-  const colorPickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (initialEvent) {
@@ -34,16 +34,6 @@ const ModalEvent = ({
         description: initialEvent.description || '',
         tag: initialEvent.tag || '',
         color: initialEvent.color || '#9380ff',
-      });
-    } else {
-      setEventData({
-        title: '',
-        date: null,
-        startTime: '',
-        endTime: '',
-        description: '',
-        tag: '',
-        color: '#9380ff',
       });
     }
   }, [initialEvent]);
@@ -61,36 +51,20 @@ const ModalEvent = ({
     setEventData(prev => ({ ...prev, color: color.hex }));
   };
 
-  const handleShowColorPicker = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setShowColorPicker(prev => !prev);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { title, date, startTime, endTime, description, tag, color } = eventData;
 
-    if (!title || !date || !startTime || !endTime) {
-      const messages = [
-        !title && 'Enter a title.',
-        !date && 'Enter a date.',
-        !startTime && !endTime && 'Enter a time.',
-      ].filter(Boolean);
-      alert(messages.join(' '));
+    if (!validateEventData(title, date, startTime, endTime)) {
       return;
     }
 
     const formattedDate = moment(date).format('YYYY-MM-DD');
     const dateFromMillis = moment(`${formattedDate}T${startTime}`).valueOf();
-    let dateToMillis = moment(`${formattedDate}T${endTime}`).valueOf();
+    const dateToMillis = moment(`${formattedDate}T${endTime}`).valueOf();
 
-    if (dateFromMillis >= dateToMillis) {
-      if (endTime < startTime) {
-        dateToMillis = moment(`${formattedDate}T${endTime}`).add(1, 'day').valueOf();
-      } else {
-        alert('End time must be greater than start time.');
-        return;
-      }
+    if (!validateEventTime(dateFromMillis, dateToMillis)) {
+      return;
     }
 
     const newEvent: EventInterface = {
@@ -113,22 +87,6 @@ const ModalEvent = ({
       console.error('Error creating event:', error);
     }
   };
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (colorPickerRef.current && !colorPickerRef.current.contains(e.target as Node)) {
-        setShowColorPicker(false);
-      }
-    };
-
-    if (showColorPicker) {
-      window.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showColorPicker]);
 
   return (
     <div className="modal overlay">
@@ -191,18 +149,7 @@ const ModalEvent = ({
                 onChange={handleChange}
               />
             </div>
-            <div className="event-form__color">
-              <span
-                className="event-form__color-base"
-                style={{ backgroundColor: eventData.color }}
-                onClick={handleShowColorPicker}
-              ></span>
-              <div className="event-form__color-picker" ref={colorPickerRef}>
-                {showColorPicker && (
-                  <SketchPicker color={eventData.color} onChange={handleColorChange} />
-                )}
-              </div>
-            </div>
+            <ColorPicker color={eventData.color} onChange={handleColorChange} />{' '}
             <button type="submit" className="event-form__submit-btn">
               {initialEvent?._id ? 'Save' : 'Create'}
             </button>

@@ -11,39 +11,39 @@ export type EventInterface = {
     x: number;
     y: number;
   };
-}
+};
 
-export interface AppState {
+export type AppState = {
   weekStartDate: Date;
-}
+};
 
-export interface CalendarProps {
+export type CalendarProps = {
   weekDates: Date[];
   calendarEvents: EventInterface[];
-}
+};
 
-export interface NavigationProps {
+export type NavigationProps = {
   weekDates: Date[];
-}
+};
 
-export interface WeekProps {
+export type WeekProps = {
   weekDates: Date[];
   calendarEvents: EventInterface[];
-}
+};
 
-export interface DayProps {
+export type DayProps = {
   dayDate: Date;
   dayEvents: EventInterface[];
   onDeleteEvent?: (_id: string) => void;
-}
+};
 
-export interface HourProps {
+export type HourProps = {
   dataHour: number;
   dataDay: number;
   hourEvents: EventInterface[];
-}
+};
 
-export interface EventProps {
+export type EventProps = {
   _id: string | undefined;
   height: number;
   marginTop: number;
@@ -54,7 +54,7 @@ export interface EventProps {
   tag?: string;
   completed?: boolean;
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-}
+};
 
 export interface HeaderProps {
   onOpenCreateModal: () => void;
@@ -82,10 +82,6 @@ export interface ModalInfoEventInterface {
   onOpenUpdateModal: (calendarEvent: EventInterface) => void;
 }
 
-// export interface ModalContextInterface {
-//   handleOpenCreateModal: (selectedDay?: number, selectedHour?: number) => void;
-// }
-
 export interface ModalContextInterface {
   handleOpenModal: (event?: EventInterface, selectedDay?: number, selectedHour?: number) => void;
 }
@@ -105,7 +101,7 @@ export interface CurrentTimeLineProps {
 export type ConfettiComponentProps = {
   show: boolean;
   onHide: () => void;
-}
+};
 
 export interface ModalEventProps {
   onCloseModal: () => void;

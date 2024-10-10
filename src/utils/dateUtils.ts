@@ -44,8 +44,9 @@ export const formatTimeRange = (dateFrom: Date, dateTo: Date): string => {
   const formattedHourTo = hoursTo % 12 || 12;
   const formattedMinutesTo = dateTo.getMinutes() ? `:${formatMins(dateTo.getMinutes())}` : '';
 
-  return `${eventStart.split(/(?<=\d)(?=AM|PM)/)[0]
-    }-${formattedHourTo}${formattedMinutesTo}${periodTo}`;
+  return `${
+    eventStart.split(/(?<=\d)(?=AM|PM)/)[0]
+  }-${formattedHourTo}${formattedMinutesTo}${periodTo}`;
 };
 
 export const formatFirstTime = (date: moment.Moment) =>
@@ -80,3 +81,30 @@ export const months: string[] = [
   'November',
   'December',
 ];
+
+export const validateEventData = (
+  title: string,
+  date: Date | null,
+  startTime: string,
+  endTime: string,
+): boolean => {
+  if (!title || !date || !startTime || !endTime) {
+    const messages = [
+      !title && 'Enter a title.',
+      !date && 'Enter a date.',
+      !startTime && !endTime && 'Enter a time.',
+    ].filter(Boolean);
+    alert(messages.join(' '));
+    return false;
+  }
+
+  return true;
+};
+
+export const validateEventTime = (dateFromMillis: number, dateToMillis: number): boolean => {
+  if (dateFromMillis >= dateToMillis) {
+    alert('End time must be greater than start time.');
+    return false;
+  }
+  return true;
+};
