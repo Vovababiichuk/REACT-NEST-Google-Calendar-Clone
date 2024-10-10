@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
+import './ColorPicker.scss';
 
 interface ColorPickerProps {
   color: string;
@@ -32,14 +33,14 @@ const ColorPicker = ({ color, onChange }: ColorPickerProps) => {
   }, [showColorPicker]);
 
   return (
-    <div className="event-form__color">
+    <div className="color-picker">
       <span
-        className="event-form__color-base"
+        className="color-picker__base"
         style={{ backgroundColor: color }}
         onClick={handleShowColorPicker}
       />
       {showColorPicker && (
-        <div className="event-form__color-picker" ref={colorPickerRef}>
+        <div className="color-picker__picker" ref={colorPickerRef}>
           <SketchPicker color={color} onChange={onChange} />
         </div>
       )}

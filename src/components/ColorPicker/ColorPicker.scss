@@ -1,0 +1,17 @@
+.color-picker {
+  position: relative;
+  &__base {
+    display: block;
+    width: 80px;
+    height: 24px;
+    border-radius: 4px;
+    margin: 8px;
+    cursor: pointer;
+  }
+
+  &__picker {
+    position: absolute;
+    top: -220px;
+    right: 136px;
+  }
+}

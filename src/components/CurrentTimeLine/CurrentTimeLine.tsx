@@ -23,10 +23,7 @@ const CurrentTimeLine = ({ dayDate }: CurrentTimeLineProps) => {
   };
 
   return isCurrentDay && isCurrentMonth ? (
-    <>
-      <div className="red-line" style={{ top: `${getTopPosition()}%` }} />
-      <div className="red-ball" style={{ top: `${getTopPosition()}%` }} />
-    </>
+    <div className="red-line" style={{ top: `${getTopPosition()}%` }} />
   ) : null;
 };
 
