@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
 
 interface ColorPickerProps {
@@ -6,7 +6,7 @@ interface ColorPickerProps {
   onChange: (color: ColorResult) => void;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({ color, onChange }) => {
+const ColorPicker = ({ color, onChange }: ColorPickerProps) => {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const colorPickerRef = useRef<HTMLDivElement>(null);
 
