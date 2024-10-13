@@ -13,15 +13,6 @@ export type EventType = {
   };
 };
 
-export type AppState = {
-  weekStartDate: Date;
-};
-
-export type CalendarProps = {
-  weekDates: Date[];
-  calendarEvents: EventType[];
-};
-
 export type NavigationProps = {
   weekDates: Date[];
 };
@@ -56,57 +47,57 @@ export type EventProps = {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
-export interface HeaderProps {
+export type HeaderProps = {
   onOpenCreateModal: () => void;
   currentWeekStartDate: Date;
   setCurrentWeekStartDate: React.Dispatch<React.SetStateAction<Date>>;
-}
+};
 
-export interface ModalCreateEventProps {
+export type ModalCreateEventProps = {
   onCloseModal: () => void;
   onCreateEvent: (event: EventType) => void;
   initialEvent?: EventType | null;
-}
+};
 
-export interface ModalUpdateEventProps {
+export type ModalUpdateEventProps = {
   calendarEvent: EventType | null;
   onCloseModal: () => void;
   onEditEvent: (eventId: string, updatedData: EventType) => void;
-}
+};
 
-export interface ModalInfoEventType {
+export type ModalInfoEventType = {
   calendarEvent: EventType;
   onCloseModal: () => void;
   onDeleteEvent: (eventId: string) => void;
   onEditEvent: (eventId: string, updatedData: EventType) => void;
   onOpenUpdateModal: (calendarEvent: EventType) => void;
-}
+};
 
-export interface ModalContextInterface {
+export type ModalContextInterface = {
   handleOpenModal: (event?: EventType, selectedDay?: number, selectedHour?: number) => void;
-}
+};
 
-export interface UpdateEventModalContextInterface {
+export type UpdateEventModalContextInterface = {
   handleOpenUpdateModal: (calendarEvent: EventType) => void;
-}
+};
 
-export interface ShowAllDataEventModalContextInterface {
+export type ShowAllDataEventModalContextInterface = {
   openShowAllDataModal: (calendarEvent: EventType) => void;
-}
+};
 
-export interface CurrentTimeLineProps {
+export type CurrentTimeLineProps = {
   dayDate: Date;
-}
+};
 
 export type ConfettiComponentProps = {
   show: boolean;
   onHide: () => void;
 };
 
-export interface ModalEventProps {
+export type ModalEventProps = {
   onCloseModal: () => void;
   onCreateEvent: (eventData: EventType) => Promise<void>;
   onEditEvent: (eventId: string, updatedData: EventType) => Promise<void>;
   initialEvent?: EventType | null;
   events: EventType[];
-}
+};
