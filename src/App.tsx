@@ -22,7 +22,7 @@ const App = () => {
     selectedEvent,
     handleOpenModal,
     handleCloseModal,
-    openShowAllDataModal,
+    openModalInfoEvent,
   } = useModals();
 
   const [currentWeekStartDate, setCurrentWeekStartDate] = useState(
@@ -39,7 +39,7 @@ const App = () => {
   return (
     <CurrentWeekStartDateContext.Provider value={currentWeekStartDate}>
       <ModalContext.Provider value={{ handleOpenModal }}>
-        <ShowAllDataEventModalContext.Provider value={{ openShowAllDataModal }}>
+        <ShowAllDataEventModalContext.Provider value={{ openModalInfoEvent }}>
           <Header
             onOpenCreateModal={() => handleOpenModal(undefined, undefined, undefined)}
             currentWeekStartDate={currentWeekStartDate}

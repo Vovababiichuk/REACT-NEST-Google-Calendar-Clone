@@ -11,6 +11,8 @@ export type EventType = {
     x: number;
     y: number;
   };
+  dateFormatted?: string;
+  timeRange?: string;
 };
 
 export type NavigationProps = {
@@ -35,15 +37,7 @@ export type HourProps = {
 };
 
 export type EventProps = {
-  _id: string | undefined;
-  height: number;
-  marginTop: number;
-  title: string;
-  time: string;
-  description?: string;
-  color?: string;
-  tag?: string;
-  completed?: boolean;
+  event: EventType;
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
@@ -82,7 +76,7 @@ export type UpdateEventModalContextInterface = {
 };
 
 export type ShowAllDataEventModalContextInterface = {
-  openShowAllDataModal: (calendarEvent: EventType) => void;
+  openModalInfoEvent: (calendarEvent: EventType) => void;
 };
 
 export type CurrentTimeLineProps = {

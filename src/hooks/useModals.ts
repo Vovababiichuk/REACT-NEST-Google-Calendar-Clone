@@ -38,7 +38,7 @@ const useModals = () => {
     setSelectedEvent(null);
   };
 
-  const openShowAllDataModal = (calendarEvent: EventType) => {
+  const openModalInfoEvent = (calendarEvent: EventType) => {
     if (calendarEvent) {
       setSelectedEvent(calendarEvent);
       setIsInfoModalOpen(true);
@@ -53,7 +53,7 @@ const useModals = () => {
     selectedEvent,
     handleOpenModal,
     handleCloseModal,
-    openShowAllDataModal,
+    openModalInfoEvent,
   };
 };
 

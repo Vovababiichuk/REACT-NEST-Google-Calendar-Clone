@@ -1,14 +1,12 @@
-import moment from 'moment';
 import React, { useContext } from 'react';
 import { ModalContext, ShowAllDataEventModalContext } from '../../contexts/Contexts';
 import { EventType, HourProps } from '../../types/types';
-import { getFormattedTimeRange } from '../../utils/utils';
 import Event from '../Event/Event';
 import './hour.scss';
 
 const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
   const { handleOpenModal } = useContext(ModalContext);
-  const { openShowAllDataModal } = useContext(ShowAllDataEventModalContext);
+  const { openModalInfoEvent } = useContext(ShowAllDataEventModalContext);
 
   const handleClick = () => {
     if (hourEvents.length === 0) {
@@ -18,7 +16,7 @@ const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
 
   const handleEventClick = (eventData: EventType, e: React.MouseEvent<HTMLDivElement>) => {
     const { clientX, clientY } = e;
-    openShowAllDataModal({
+    openModalInfoEvent({
       ...eventData,
       dateFrom: new Date(eventData.dateFrom),
       dateTo: new Date(eventData.dateTo),
@@ -28,23 +26,9 @@ const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
 
   return (
     <div className="calendar__time-slot" data-time={dataHour + 1} onClick={handleClick}>
-      {hourEvents.map(event => {
-        const formattedTimeRange = getFormattedTimeRange(event.dateFrom, event.dateTo);
-
-        return (
-          <Event
-            key={event._id}
-            _id={event._id}
-            height={moment(event.dateTo).diff(moment(event.dateFrom), 'minutes')}
-            marginTop={moment(event.dateFrom).minutes()}
-            time={formattedTimeRange}
-            title={event.title}
-            color={event.color}
-            completed={event.done}
-            onClick={e => handleEventClick(event, e)}
-          />
-        );
-      })}
+      {hourEvents.map(event => (
+        <Event key={event._id} event={event} onClick={e => handleEventClick(event, e)} />
+      ))}
     </div>
   );
 };

@@ -1,19 +1,26 @@
 import clsx from 'clsx';
+import moment from 'moment';
 import tinycolor from 'tinycolor-ts';
 import { EventProps } from '../../types/types';
+import { getFormattedTimeRange } from '../../utils/utils';
 import './event.scss';
 
 const darkenColor = (color: string | undefined) => {
   return tinycolor(color).darken(10).toString();
 };
 
-const Event = ({ height, marginTop, title, time, color, completed, onClick }: EventProps) => {
+const Event = ({ event, onClick }: EventProps) => {
+  const { title, dateFrom, dateTo, color, done } = event;
+  const height = moment(dateTo).diff(moment(dateFrom), 'minutes');
+  const marginTop = moment(dateFrom).minutes();
+  const time = getFormattedTimeRange(dateFrom, dateTo);
+
   return (
     <div
       className={clsx('event', {
         'event--small': height <= 30,
         'event--hide-time': height <= 50,
-        'event--completed': completed,
+        'event--completed': done,
       })}
       style={{
         height,
