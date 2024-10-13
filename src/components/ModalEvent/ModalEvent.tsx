@@ -4,7 +4,7 @@ import { ColorResult } from 'react-color';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { EventInterface, ModalEventProps } from '../../types/types';
-import { validateEventData, validateEventTime } from '../../utils/dateUtils';
+import { validateEvent } from '../../utils/dateUtils';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import './ModalEvent.scss';
 
@@ -13,6 +13,7 @@ const ModalEvent = ({
   onCreateEvent,
   onEditEvent,
   initialEvent,
+  events,
 }: ModalEventProps) => {
   const [eventData, setEventData] = useState({
     title: '',
@@ -55,17 +56,9 @@ const ModalEvent = ({
     e.preventDefault();
     const { title, date, startTime, endTime, description, tag, color } = eventData;
 
-    if (!validateEventData(title, date, startTime, endTime)) {
-      return;
-    }
-
     const formattedDate = moment(date).format('YYYY-MM-DD');
     const dateFromMillis = moment(`${formattedDate}T${startTime}`).valueOf();
     const dateToMillis = moment(`${formattedDate}T${endTime}`).valueOf();
-
-    if (!validateEventTime(dateFromMillis, dateToMillis)) {
-      return;
-    }
 
     const newEvent: EventInterface = {
       title,
@@ -75,6 +68,12 @@ const ModalEvent = ({
       tag,
       color,
     };
+
+    const errorMessage = validateEvent(newEvent, events);
+    if (errorMessage) {
+      alert(errorMessage);
+      return;
+    }
 
     try {
       if (initialEvent && initialEvent._id) {

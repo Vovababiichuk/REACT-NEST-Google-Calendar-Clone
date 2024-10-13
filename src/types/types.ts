@@ -108,4 +108,5 @@ export interface ModalEventProps {
   onCreateEvent: (eventData: EventInterface) => Promise<void>;
   onEditEvent: (eventId: string, updatedData: EventInterface) => Promise<void>;
   initialEvent?: EventInterface | null;
+  events: EventInterface[];
 }

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { EventInterface } from '../types/types';
 
 export const getWeekStartDate = (date: Date): Date => {
   const dateCopy = new Date(date);
@@ -82,29 +83,30 @@ export const months: string[] = [
   'December',
 ];
 
-export const validateEventData = (
-  title: string,
-  date: Date | null,
-  startTime: string,
-  endTime: string,
-): boolean => {
-  if (!title || !date || !startTime || !endTime) {
-    const messages = [
-      !title && 'Enter a title.',
-      !date && 'Enter a date.',
-      !startTime && !endTime && 'Enter a time.',
-    ].filter(Boolean);
-    alert(messages.join(' '));
-    return false;
+export const validateEvent = (
+  newEvent: EventInterface,
+  events: EventInterface[],
+): string | null => {
+  const { title, dateFrom, dateTo } = newEvent;
+
+  if (!title) return 'Please enter a title.';
+
+  if (dateFrom && dateTo && moment(dateFrom).isValid() && moment(dateTo).isValid()) {
+    if (moment(dateFrom) >= moment(dateTo)) return 'End time must be later than start time.';
+    if (moment(dateTo).diff(moment(dateFrom), 'minutes') < 15) {
+      return 'Event duration must be at least 15 minutes.';
+    }
+
+    const isOverlapping = events.some(event => {
+      const eventStart = moment(event.dateFrom);
+      const eventEnd = moment(event.dateTo);
+      return moment(dateFrom) < eventEnd && moment(dateTo) > eventStart;
+    });
+
+    if (isOverlapping) return 'This event overlaps with an existing event.';
+  } else {
+    return 'Please select a date and time.';
   }
 
-  return true;
-};
-
-export const validateEventTime = (dateFromMillis: number, dateToMillis: number): boolean => {
-  if (dateFromMillis >= dateToMillis) {
-    alert('End time must be greater than start time.');
-    return false;
-  }
-  return true;
+  return null;
 };

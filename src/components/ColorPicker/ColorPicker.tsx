@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { ColorResult, SketchPicker } from 'react-color';
 import './ColorPicker.scss';
 
-interface ColorPickerProps {
+type ColorPickerProps = {
   color: string;
   onChange: (color: ColorResult) => void;
-}
+};
 
 const ColorPicker = ({ color, onChange }: ColorPickerProps) => {
   const [showColorPicker, setShowColorPicker] = useState(false);

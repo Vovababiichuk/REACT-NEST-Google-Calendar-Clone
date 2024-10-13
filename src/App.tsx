@@ -25,8 +25,9 @@ const App = () => {
     openShowAllDataModal,
   } = useModals();
 
-  const initialDate = getWeekStartDate(moment().toDate());
-  const [currentWeekStartDate, setCurrentWeekStartDate] = useState(initialDate);
+  const [currentWeekStartDate, setCurrentWeekStartDate] = useState(
+    getWeekStartDate(moment().toDate()),
+  );
 
   const [showConfetti, setShowConfetti] = useState(false);
 
@@ -52,6 +53,7 @@ const App = () => {
               onCreateEvent={handleCreateEvent}
               onEditEvent={handleUpdateEvent}
               initialEvent={selectedEvent}
+              events={events}
             />
           )}
           {isInfoModalOpen && selectedEvent && (
