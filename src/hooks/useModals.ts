@@ -10,7 +10,11 @@ const useModals = () => {
 
   const currentWeekStartDate = useContext(CurrentWeekStartDateContext) || new Date();
 
-  const handleOpenModal = (calendarEvent?: EventInterface, selectedDay?: number, selectedHour?: number) => {
+  const handleOpenModal = (
+    calendarEvent?: EventInterface,
+    selectedDay?: number,
+    selectedHour?: number,
+  ) => {
     setIsModalOpen(true);
     setIsInfoModalOpen(false);
 
@@ -20,20 +24,12 @@ const useModals = () => {
       const selectedDate = moment(currentWeekStartDate)
         .date(selectedDay)
         .hour(selectedHour)
-        .minute(0)
-        .second(0)
+        .startOf('hour')
         .toDate();
 
-      const endTime = moment(selectedDate)
-        .hour(selectedHour + 1)
-        .minute(0)
-        .second(0)
-        .toDate();
+      const endTime = moment(selectedDate).add(1, 'hour').toDate();
 
-      setSelectedEvent({
-        dateFrom: selectedDate,
-        dateTo: endTime,
-      } as EventInterface);
+      setSelectedEvent({ dateFrom: selectedDate, dateTo: endTime } as EventInterface);
     }
   };
 

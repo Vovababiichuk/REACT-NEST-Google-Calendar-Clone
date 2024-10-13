@@ -86,6 +86,7 @@ export const months: string[] = [
 export const validateEvent = (
   newEvent: EventInterface,
   events: EventInterface[],
+  editingEventId?: string,
 ): string | null => {
   const { title, dateFrom, dateTo } = newEvent;
 
@@ -98,6 +99,8 @@ export const validateEvent = (
     }
 
     const isOverlapping = events.some(event => {
+      if (editingEventId && event._id === editingEventId) return false;
+
       const eventStart = moment(event.dateFrom);
       const eventEnd = moment(event.dateTo);
       return moment(dateFrom) < eventEnd && moment(dateTo) > eventStart;

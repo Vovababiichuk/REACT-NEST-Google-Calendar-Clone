@@ -4,7 +4,7 @@ import { ColorResult } from 'react-color';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { EventInterface, ModalEventProps } from '../../types/types';
-import { validateEvent } from '../../utils/dateUtils';
+import { validateEvent } from '../../utils/utils';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import './ModalEvent.scss';
 
@@ -69,7 +69,7 @@ const ModalEvent = ({
       color,
     };
 
-    const errorMessage = validateEvent(newEvent, events);
+    const errorMessage = validateEvent(newEvent, events, initialEvent?._id);
     if (errorMessage) {
       alert(errorMessage);
       return;

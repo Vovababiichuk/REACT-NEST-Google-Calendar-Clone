@@ -12,7 +12,7 @@ import {
   ModalContext,
   ShowAllDataEventModalContext,
 } from './contexts/Contexts';
-import { generateWeekRange, getWeekStartDate } from './utils/dateUtils';
+import { generateWeekRange, getWeekStartDate } from './utils/utils';
 import './common.scss';
 
 const App = () => {

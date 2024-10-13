@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { NavigationProps } from '../../types/types';
-import { days } from '../../utils/dateUtils';
+import { days } from '../../utils/utils';
 import './navigation.scss';
 
 const Navigation = ({ weekDates }: NavigationProps) => {
