@@ -1,4 +1,4 @@
-export type EventInterface = {
+export type EventType = {
   _id?: string;
   title: string;
   dateFrom: Date;
@@ -19,7 +19,7 @@ export type AppState = {
 
 export type CalendarProps = {
   weekDates: Date[];
-  calendarEvents: EventInterface[];
+  calendarEvents: EventType[];
 };
 
 export type NavigationProps = {
@@ -28,19 +28,19 @@ export type NavigationProps = {
 
 export type WeekProps = {
   weekDates: Date[];
-  calendarEvents: EventInterface[];
+  calendarEvents: EventType[];
 };
 
 export type DayProps = {
   dayDate: Date;
-  dayEvents: EventInterface[];
+  dayEvents: EventType[];
   onDeleteEvent?: (_id: string) => void;
 };
 
 export type HourProps = {
   dataHour: number;
   dataDay: number;
-  hourEvents: EventInterface[];
+  hourEvents: EventType[];
 };
 
 export type EventProps = {
@@ -64,34 +64,34 @@ export interface HeaderProps {
 
 export interface ModalCreateEventProps {
   onCloseModal: () => void;
-  onCreateEvent: (event: EventInterface) => void;
-  initialEvent?: EventInterface | null;
+  onCreateEvent: (event: EventType) => void;
+  initialEvent?: EventType | null;
 }
 
 export interface ModalUpdateEventProps {
-  calendarEvent: EventInterface | null;
+  calendarEvent: EventType | null;
   onCloseModal: () => void;
-  onEditEvent: (eventId: string, updatedData: EventInterface) => void;
+  onEditEvent: (eventId: string, updatedData: EventType) => void;
 }
 
-export interface ModalInfoEventInterface {
-  calendarEvent: EventInterface;
+export interface ModalInfoEventType {
+  calendarEvent: EventType;
   onCloseModal: () => void;
   onDeleteEvent: (eventId: string) => void;
-  onEditEvent: (eventId: string, updatedData: EventInterface) => void;
-  onOpenUpdateModal: (calendarEvent: EventInterface) => void;
+  onEditEvent: (eventId: string, updatedData: EventType) => void;
+  onOpenUpdateModal: (calendarEvent: EventType) => void;
 }
 
 export interface ModalContextInterface {
-  handleOpenModal: (event?: EventInterface, selectedDay?: number, selectedHour?: number) => void;
+  handleOpenModal: (event?: EventType, selectedDay?: number, selectedHour?: number) => void;
 }
 
 export interface UpdateEventModalContextInterface {
-  handleOpenUpdateModal: (calendarEvent: EventInterface) => void;
+  handleOpenUpdateModal: (calendarEvent: EventType) => void;
 }
 
 export interface ShowAllDataEventModalContextInterface {
-  openShowAllDataModal: (calendarEvent: EventInterface) => void;
+  openShowAllDataModal: (calendarEvent: EventType) => void;
 }
 
 export interface CurrentTimeLineProps {
@@ -105,8 +105,8 @@ export type ConfettiComponentProps = {
 
 export interface ModalEventProps {
   onCloseModal: () => void;
-  onCreateEvent: (eventData: EventInterface) => Promise<void>;
-  onEditEvent: (eventId: string, updatedData: EventInterface) => Promise<void>;
-  initialEvent?: EventInterface | null;
-  events: EventInterface[];
+  onCreateEvent: (eventData: EventType) => Promise<void>;
+  onEditEvent: (eventId: string, updatedData: EventType) => Promise<void>;
+  initialEvent?: EventType | null;
+  events: EventType[];
 }

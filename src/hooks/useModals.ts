@@ -1,17 +1,17 @@
 import moment from 'moment';
 import { useContext, useState } from 'react';
 import { CurrentWeekStartDateContext } from '../contexts/Contexts';
-import { EventInterface } from '../types/types';
+import { EventType } from '../types/types';
 
 const useModals = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState<EventInterface | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<EventType | null>(null);
 
   const currentWeekStartDate = useContext(CurrentWeekStartDateContext) || new Date();
 
   const handleOpenModal = (
-    calendarEvent?: EventInterface,
+    calendarEvent?: EventType,
     selectedDay?: number,
     selectedHour?: number,
   ) => {
@@ -29,7 +29,7 @@ const useModals = () => {
 
       const endTime = moment(selectedDate).add(1, 'hour').toDate();
 
-      setSelectedEvent({ dateFrom: selectedDate, dateTo: endTime } as EventInterface);
+      setSelectedEvent({ dateFrom: selectedDate, dateTo: endTime } as EventType);
     }
   };
 
@@ -38,7 +38,7 @@ const useModals = () => {
     setSelectedEvent(null);
   };
 
-  const openShowAllDataModal = (calendarEvent: EventInterface) => {
+  const openShowAllDataModal = (calendarEvent: EventType) => {
     if (calendarEvent) {
       setSelectedEvent(calendarEvent);
       setIsInfoModalOpen(true);

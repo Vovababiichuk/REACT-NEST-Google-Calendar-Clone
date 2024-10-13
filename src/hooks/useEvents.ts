@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { createEvent, deleteEvent, getEvents, updateEvent } from '../gateway/events';
-import { EventInterface } from '../types/types';
+import { EventType } from '../types/types';
 
 const useEvents = (handleCloseModal: () => void, setShowConfetti: (show: boolean) => void) => {
-  const [events, setEvents] = useState<EventInterface[]>([]);
+  const [events, setEvents] = useState<EventType[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const useEvents = (handleCloseModal: () => void, setShowConfetti: (show: boolean
     fetchEvents();
   }, []);
 
-  const handleCreateEvent = async (eventData: EventInterface) => {
+  const handleCreateEvent = async (eventData: EventType) => {
     try {
       const newEvent = await createEvent(eventData);
       setEvents(prevEvents => [...prevEvents, newEvent]);
@@ -33,7 +33,7 @@ const useEvents = (handleCloseModal: () => void, setShowConfetti: (show: boolean
     }
   };
 
-  const handleUpdateEvent = async (eventId: string, updatedData: EventInterface) => {
+  const handleUpdateEvent = async (eventId: string, updatedData: EventType) => {
     try {
       const updatedEvent = await updateEvent(eventId, updatedData);
       setEvents(prevEvents =>

@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { EventInterface } from '../types/types';
+import { EventType } from '../types/types';
 
 export const getWeekStartDate = (date: Date): Date => {
   const dateCopy = new Date(date);
@@ -84,8 +84,8 @@ export const months: string[] = [
 ];
 
 export const validateEvent = (
-  newEvent: EventInterface,
-  events: EventInterface[],
+  newEvent: EventType,
+  events: EventType[],
   editingEventId?: string,
 ): string | null => {
   const { title, dateFrom, dateTo } = newEvent;

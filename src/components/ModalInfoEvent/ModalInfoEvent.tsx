@@ -11,7 +11,7 @@ import {
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { updateEvent } from '../../gateway/events';
-import { ModalInfoEventInterface } from '../../types/types';
+import { ModalInfoEventType } from '../../types/types';
 import './ModalInfoEvent.scss';
 
 const ModalInfoEvent = ({
@@ -20,7 +20,7 @@ const ModalInfoEvent = ({
   onDeleteEvent,
   onEditEvent,
   onOpenUpdateModal,
-}: ModalInfoEventInterface) => {
+}: ModalInfoEventType) => {
   const [eventData, setEventData] = useState({
     color: '#c5bdf5',
     title: '',

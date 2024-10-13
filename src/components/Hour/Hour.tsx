@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useContext } from 'react';
 import { ModalContext, ShowAllDataEventModalContext } from '../../contexts/Contexts';
-import { EventInterface, HourProps } from '../../types/types';
+import { EventType, HourProps } from '../../types/types';
 import { getFormattedTimeRange } from '../../utils/utils';
 import Event from '../Event/Event';
 import './hour.scss';
@@ -16,7 +16,7 @@ const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
     }
   };
 
-  const handleEventClick = (eventData: EventInterface, e: React.MouseEvent<HTMLDivElement>) => {
+  const handleEventClick = (eventData: EventType, e: React.MouseEvent<HTMLDivElement>) => {
     const { clientX, clientY } = e;
     openShowAllDataModal({
       ...eventData,

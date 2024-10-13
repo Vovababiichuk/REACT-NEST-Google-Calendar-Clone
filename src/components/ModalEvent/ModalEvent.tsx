@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ColorResult } from 'react-color';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { EventInterface, ModalEventProps } from '../../types/types';
+import { EventType, ModalEventProps } from '../../types/types';
 import { validateEvent } from '../../utils/utils';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import './ModalEvent.scss';
@@ -60,7 +60,7 @@ const ModalEvent = ({
     const dateFromMillis = moment(`${formattedDate}T${startTime}`).valueOf();
     const dateToMillis = moment(`${formattedDate}T${endTime}`).valueOf();
 
-    const newEvent: EventInterface = {
+    const newEvent: EventType = {
       title,
       description,
       dateFrom: new Date(dateFromMillis),

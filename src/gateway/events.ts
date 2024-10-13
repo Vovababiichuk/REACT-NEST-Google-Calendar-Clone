@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { EventInterface } from '../types/types';
+import { EventType } from '../types/types';
 
 const baseUrl = 'https://nest-back-google-calendar-clone.vercel.app/events';
 
-export const createEvent = async (eventData: EventInterface) => {
+export const createEvent = async (eventData: EventType) => {
   try {
     const response = await axios.post(baseUrl, eventData);
     return response.data;
@@ -13,7 +13,7 @@ export const createEvent = async (eventData: EventInterface) => {
   }
 };
 
-export const updateEvent = async (_id: string, updatedData: EventInterface) => {
+export const updateEvent = async (_id: string, updatedData: EventType) => {
   try {
     const res = await axios.put(`${baseUrl}/${_id}`, updatedData);
     return res.data;
