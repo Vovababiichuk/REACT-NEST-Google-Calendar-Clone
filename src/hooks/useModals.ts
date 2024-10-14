@@ -11,16 +11,16 @@ const useModals = () => {
   const currentWeekStartDate = useContext(CurrentWeekStartDateContext) || new Date();
 
   const handleOpenModal = (
-    calendarEvent?: EventType,
-    selectedDay?: number,
-    selectedHour?: number,
+    calendarEvent?: EventType | null,
+    selectedDay?: number | null,
+    selectedHour?: number | null,
   ) => {
     setIsModalOpen(true);
     setIsInfoModalOpen(false);
 
     if (calendarEvent) {
       setSelectedEvent(calendarEvent);
-    } else if (selectedDay !== undefined && selectedHour !== undefined) {
+    } else if (selectedDay != null && selectedHour != null) {
       const selectedDate = moment(currentWeekStartDate)
         .date(selectedDay)
         .hour(selectedHour)

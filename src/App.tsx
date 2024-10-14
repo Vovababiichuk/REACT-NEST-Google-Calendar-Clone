@@ -41,7 +41,7 @@ const App = () => {
       <ModalContext.Provider value={{ handleOpenModal }}>
         <ShowAllDataEventModalContext.Provider value={{ openModalInfoEvent }}>
           <Header
-            onOpenCreateModal={() => handleOpenModal(undefined, undefined, undefined)}
+            onOpenCreateModal={() => handleOpenModal(null, null, null)}
             currentWeekStartDate={currentWeekStartDate}
             setCurrentWeekStartDate={setCurrentWeekStartDate}
           />

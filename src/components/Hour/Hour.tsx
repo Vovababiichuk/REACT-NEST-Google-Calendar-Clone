@@ -16,7 +16,7 @@ const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
 
   const handleClick = () => {
     if (hourEvents.length === 0) {
-      handleOpenModal(undefined, dataDay, dataHour);
+      handleOpenModal(null, dataDay, dataHour);
     }
   };
 

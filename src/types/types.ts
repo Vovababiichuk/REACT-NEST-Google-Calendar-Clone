@@ -14,7 +14,11 @@ export type EventType = {
 };
 
 export type ModalContextType = {
-  handleOpenModal: (event?: EventType, selectedDay?: number, selectedHour?: number) => void;
+  handleOpenModal: (
+    event?: EventType | null,
+    selectedDay?: number | null,
+    selectedHour?: number | null,
+  ) => void;
 };
 
 export type UpdateEventModalContexType = {

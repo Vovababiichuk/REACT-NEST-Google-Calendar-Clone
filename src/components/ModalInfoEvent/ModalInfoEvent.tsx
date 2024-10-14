@@ -18,7 +18,7 @@ type ModalInfoEventType = {
   onCloseModal: () => void;
   onDeleteEvent: (eventId: string) => void;
   onEditEvent: (eventId: string, updatedData: EventType) => void;
-  onOpenUpdateModal: (calendarEvent: EventType) => void;
+  onOpenUpdateModal: (calendarEvent: EventType | null) => void;
 };
 
 const ModalInfoEvent = ({
