@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ColorResult } from 'react-color';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -24,28 +24,14 @@ const ModalEvent = ({
   events,
 }: ModalEventProps) => {
   const [eventData, setEventData] = useState({
-    title: '',
-    date: null as Date | null,
-    startTime: '',
-    endTime: '',
-    description: '',
-    tag: '',
-    color: '#9380ff',
+    title: initialEvent?.title || '',
+    date: initialEvent ? moment(initialEvent.dateFrom).toDate() : null,
+    startTime: initialEvent ? moment(initialEvent.dateFrom).format('HH:mm') : '',
+    endTime: initialEvent ? moment(initialEvent.dateTo).format('HH:mm') : '',
+    description: initialEvent?.description || '',
+    tag: initialEvent?.tag || '',
+    color: initialEvent?.color || '#9380ff',
   });
-
-  useEffect(() => {
-    if (initialEvent) {
-      setEventData({
-        title: initialEvent.title || '',
-        date: moment(initialEvent.dateFrom).toDate(),
-        startTime: moment(initialEvent.dateFrom).format('HH:mm'),
-        endTime: moment(initialEvent.dateTo).format('HH:mm'),
-        description: initialEvent.description || '',
-        tag: initialEvent.tag || '',
-        color: initialEvent.color || '#9380ff',
-      });
-    }
-  }, [initialEvent]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
