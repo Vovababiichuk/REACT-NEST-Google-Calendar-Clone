@@ -9,7 +9,6 @@ import {
   Trash2,
 } from 'lucide-react';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
 import { updateEvent } from '../../gateway/events';
 import { EventType } from '../../types/types';
 import './ModalInfoEvent.scss';
@@ -29,40 +28,16 @@ const ModalInfoEvent = ({
   onEditEvent,
   onOpenUpdateModal,
 }: ModalInfoEventType) => {
-  const [eventData, setEventData] = useState<Partial<EventType> | null>(null);
-
-  useEffect(() => {
-    if (calendarEvent) {
-      const eventStart = moment(calendarEvent.dateFrom);
-      const eventEnd = moment(calendarEvent.dateTo);
-
-      setEventData({
-        title: calendarEvent.title || '',
-        dateFormatted: eventStart.format('dddd, MMMM D'),
-        timeRange: `${eventStart.format('h:mm')} – ${eventEnd.format('h:mmA')}`,
-        description: calendarEvent.description || '',
-        tag: calendarEvent.tag || '',
-        color: calendarEvent.color || '#c5bdf5',
-        done: calendarEvent.done || false,
-      });
-    }
-  }, [calendarEvent]);
+  const { _id, color, done, title, dateFrom, dateTo, description, tag } = calendarEvent;
 
   const handleMarkCompleted = async () => {
-    if (calendarEvent && calendarEvent._id && eventData) {
+    if (_id) {
       try {
-        const updatedEvent = await updateEvent(calendarEvent._id, {
+        const updatedEvent = await updateEvent(_id, {
           ...calendarEvent,
-          done: !eventData.done,
+          done: !done,
         });
-        onEditEvent(calendarEvent._id, updatedEvent);
-        setEventData(prevData => {
-          if (prevData) {
-            return { ...prevData, done: !prevData.done };
-          } else {
-            return { done: !calendarEvent.done };
-          }
-        });
+        onEditEvent(_id, updatedEvent);
       } catch (error) {
         console.error('Error updating event status:', error);
       }
@@ -115,7 +90,7 @@ const ModalInfoEvent = ({
               <Trash2
                 className="show-event__button show-event__button_delete"
                 size={20}
-                onClick={() => calendarEvent?._id && onDeleteEvent(calendarEvent._id)}
+                onClick={() => _id && onDeleteEvent(_id)}
               />
               <Mail
                 className="show-event__button show-event__button_email"
@@ -130,23 +105,23 @@ const ModalInfoEvent = ({
           <div className="show-event__heading">
             <span
               className="show-event__heading-color"
-              style={{ backgroundColor: eventData?.color || '#c5bdf5' }}
+              style={{ backgroundColor: color || '#c5bdf5' }}
             ></span>
-            <h2 className="show-event__heading-title">{eventData?.title}</h2>
+            <h2 className="show-event__heading-title">{title}</h2>
           </div>
-          {eventData && (
-            <div className="show-event__info">
-              <CalendarClock size={18} />
-              <span className="show-event__info-date">{eventData.dateFormatted}</span>
-              <span className="show-event__info-time">{eventData.timeRange}</span>
-            </div>
-          )}
+          <div className="show-event__info">
+            <CalendarClock size={18} />
+            <span className="show-event__info-date">{moment(dateFrom).format('dddd, MMMM D')}</span>
+            <span className="show-event__info-time">
+              {moment(dateFrom).format('h:mm')} – {moment(dateTo).format('h:mmA')}
+            </span>
+          </div>
           <div className="show-event__description-container">
             <AlignLeft className="show-event__description-icon" size={20} />
             <textarea
               className="show-event__description"
               rows={3}
-              value={eventData?.description}
+              value={description}
               readOnly
               title="Description"
               placeholder="no description..."
@@ -157,16 +132,16 @@ const ModalInfoEvent = ({
             <input
               className="show-event__tag-input"
               type="text"
-              value={eventData?.tag}
+              value={tag}
               readOnly
               placeholder="no tag..."
               title="Tag"
             />
           </div>
-          <div className="show-event__mark" style={{ color: eventData?.color || '#c5bdf5' }}>
+          <div className="show-event__mark" style={{ color: color || '#c5bdf5' }}>
             <CalendarCheck className="show-event__mark-icon" size={16} />
             <span className="show-event__mark-btn" onClick={handleMarkCompleted}>
-              {eventData?.done ? 'Mark uncompleted' : 'Mark completed'}
+              {done ? 'Mark uncompleted' : 'Mark completed'}
             </span>
           </div>
         </div>

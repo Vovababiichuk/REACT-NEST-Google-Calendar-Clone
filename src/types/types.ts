@@ -11,8 +11,6 @@ export type EventType = {
     x: number;
     y: number;
   };
-  dateFormatted?: string;
-  timeRange?: string;
 };
 
 export type ModalContextType = {
