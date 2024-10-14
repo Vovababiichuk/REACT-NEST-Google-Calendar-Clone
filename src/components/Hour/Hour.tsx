@@ -1,8 +1,14 @@
 import React, { useContext } from 'react';
 import { ModalContext, ShowAllDataEventModalContext } from '../../contexts/Contexts';
-import { EventType, HourProps } from '../../types/types';
+import { EventType } from '../../types/types';
 import Event from '../Event/Event';
 import './hour.scss';
+
+type HourProps = {
+  dataHour: number;
+  dataDay: number;
+  hourEvents: EventType[];
+};
 
 const Hour = ({ dataDay, dataHour, hourEvents }: HourProps) => {
   const { handleOpenModal } = useContext(ModalContext);

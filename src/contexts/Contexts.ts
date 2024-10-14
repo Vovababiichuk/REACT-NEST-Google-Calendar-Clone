@@ -1,19 +1,19 @@
 import { createContext } from 'react';
 import {
-  ModalContextInterface,
-  ShowAllDataEventModalContextInterface,
-  UpdateEventModalContextInterface,
+  ModalContextType,
+  ShowAllDataEventModalContextType,
+  UpdateEventModalContexType,
 } from '../types/types';
 
-export const ModalContext = createContext<ModalContextInterface>({
+export const ModalContext = createContext<ModalContextType>({
   handleOpenModal: () => {},
 });
 
-export const UpdateEventModalContext = createContext<UpdateEventModalContextInterface>({
+export const UpdateEventModalContext = createContext<UpdateEventModalContexType>({
   handleOpenUpdateModal: () => {},
 });
 
-export const ShowAllDataEventModalContext = createContext<ShowAllDataEventModalContextInterface>({
+export const ShowAllDataEventModalContext = createContext<ShowAllDataEventModalContextType>({
   openModalInfoEvent: () => {},
 });
 

@@ -11,8 +11,16 @@ import {
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { updateEvent } from '../../gateway/events';
-import { EventType, ModalInfoEventType } from '../../types/types';
+import { EventType } from '../../types/types';
 import './ModalInfoEvent.scss';
+
+type ModalInfoEventType = {
+  calendarEvent: EventType;
+  onCloseModal: () => void;
+  onDeleteEvent: (eventId: string) => void;
+  onEditEvent: (eventId: string, updatedData: EventType) => void;
+  onOpenUpdateModal: (calendarEvent: EventType) => void;
+};
 
 const ModalInfoEvent = ({
   calendarEvent,

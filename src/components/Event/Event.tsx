@@ -1,9 +1,14 @@
 import clsx from 'clsx';
 import moment from 'moment';
 import tinycolor from 'tinycolor-ts';
-import { EventProps } from '../../types/types';
+import { EventType } from '../../types/types';
 import { getFormattedTimeRange } from '../../utils/utils';
 import './event.scss';
+
+type EventProps = {
+  event: EventType;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+};
 
 const darkenColor = (color: string | undefined) => {
   return tinycolor(color).darken(10).toString();

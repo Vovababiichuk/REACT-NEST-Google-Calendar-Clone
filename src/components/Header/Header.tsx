@@ -1,9 +1,14 @@
 import { CalendarPlusIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import moment from 'moment';
 import { useCallback } from 'react';
-import { HeaderProps } from '../../types/types';
 import CalendarModeToggle from '../CalendarModeToggle/CalendarModeToggle';
 import './header.scss';
+
+type HeaderProps = {
+  onOpenCreateModal: () => void;
+  currentWeekStartDate: Date;
+  setCurrentWeekStartDate: React.Dispatch<React.SetStateAction<Date>>;
+};
 
 const Header = ({
   onOpenCreateModal,

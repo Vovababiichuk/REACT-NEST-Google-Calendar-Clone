@@ -1,7 +1,10 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { CurrentTimeLineProps } from '../../types/types';
 import './CurrentTimeLine.scss';
+
+type CurrentTimeLineProps = {
+  dayDate: Date;
+};
 
 const CurrentTimeLine = ({ dayDate }: CurrentTimeLineProps) => {
   const [currentTime, setCurrentTime] = useState(moment());

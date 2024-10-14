@@ -1,7 +1,12 @@
 import moment from 'moment';
-import { WeekProps } from '../../types/types';
+import { EventType } from '../../types/types';
 import Day from '../Day/Day';
 import './week.scss';
+
+type WeekProps = {
+  weekDates: Date[];
+  calendarEvents: EventType[];
+};
 
 const Week = ({ weekDates, calendarEvents }: WeekProps) => (
   <div className="calendar__week">

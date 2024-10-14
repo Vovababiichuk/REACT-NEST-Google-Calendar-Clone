@@ -1,7 +1,10 @@
 import clsx from 'clsx';
-import { NavigationProps } from '../../types/types';
 import { days } from '../../utils/utils';
 import './navigation.scss';
+
+type NavigationProps = {
+  weekDates: Date[];
+};
 
 const Navigation = ({ weekDates }: NavigationProps) => {
   const today = new Date();

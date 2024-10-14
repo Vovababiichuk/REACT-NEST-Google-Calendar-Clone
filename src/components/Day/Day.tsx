@@ -1,7 +1,13 @@
 import moment from 'moment';
-import { DayProps } from '../../types/types';
+import { EventType } from '../../types/types';
 import CurrentTimeLine from '../CurrentTimeLine/CurrentTimeLine';
 import Hour from '../Hour/Hour';
+
+type DayProps = {
+  dayDate: Date;
+  dayEvents: EventType[];
+  onDeleteEvent?: (_id: string) => void;
+};
 
 const Day = ({ dayDate, dayEvents }: DayProps) => {
   const hours = Array.from({ length: 24 }, (_, index) => index);

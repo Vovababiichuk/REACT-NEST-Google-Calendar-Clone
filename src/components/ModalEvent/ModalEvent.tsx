@@ -3,10 +3,18 @@ import React, { useEffect, useState } from 'react';
 import { ColorResult } from 'react-color';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { EventType, ModalEventProps } from '../../types/types';
+import { EventType } from '../../types/types';
 import { validateEvent } from '../../utils/utils';
 import ColorPicker from '../ColorPicker/ColorPicker';
 import './ModalEvent.scss';
+
+type ModalEventProps = {
+  onCloseModal: () => void;
+  onCreateEvent: (eventData: EventType) => Promise<void>;
+  onEditEvent: (eventId: string, updatedData: EventType) => Promise<void>;
+  initialEvent?: EventType | null;
+  events: EventType[];
+};
 
 const ModalEvent = ({
   onCloseModal,
